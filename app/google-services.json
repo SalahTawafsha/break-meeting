@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "656357627336",
+    "project_id": "break-meet",
+    "storage_bucket": "break-meet.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:656357627336:android:f18d625240cf3aaaba9cfd",
+        "android_client_info": {
+          "package_name": "com.example.break_meet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "656357627336-hos7s6evmtrn2veavslup2vpk4962hhl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCl_hqJijD9spsYg_fkVt_Iob9QVstTJDQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "656357627336-hos7s6evmtrn2veavslup2vpk4962hhl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

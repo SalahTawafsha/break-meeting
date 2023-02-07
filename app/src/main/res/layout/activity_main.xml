@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="358dp"
+        android:layout_height="658dp"
+        android:background="@color/black"
+        android:gravity="center"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="26dp"
+        tools:layout_editor_absoluteY="36dp">
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="332dp"
+            android:layout_height="219dp"
+            app:srcCompat="@drawable/break_meet"
+            tools:layout_editor_absoluteX="13dp"
+            tools:layout_editor_absoluteY="97dp" />
+
+        <EditText
+            android:id="@+id/editTextTextPersonName"
+            style="@style/EditText"
+            android:hint="UserName"
+            android:inputType="textPersonName"
+            tools:layout_editor_absoluteX="74dp"
+            tools:layout_editor_absoluteY="335dp" />
+
+        <EditText
+            android:id="@+id/editTextTextPassword"
+            style="@style/EditText"
+            android:hint="Passowrd"
+            android:inputType="textPassword"
+            tools:layout_editor_absoluteX="74dp"
+            tools:layout_editor_absoluteY="412dp" />
+
+        <TextView
+            android:id="@+id/textView2"
+            style="@style/EditText"
+            android:layout_width="220dp"
+            android:layout_height="51dp"
+            android:fontFamily="@font/comic_neue_bold_italic"
+            android:text="Welcom To Break Meeting"
+            android:textColor="#9F9F9F"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="69dp"
+            tools:layout_editor_absoluteY="29dp" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="184dp"
+            android:layout_height="37dp"
+            android:text="haven't Account?"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            tools:layout_editor_absoluteX="32dp"
+            tools:layout_editor_absoluteY="515dp" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="133dp"
+            android:layout_height="44dp"
+            android:background="#00000000"
+            android:text="Sign Up"
+            android:textAlignment="center"
+            android:textColor="#009DFF"
+            android:textSize="20sp"
+            tools:layout_editor_absoluteX="192dp"
+            tools:layout_editor_absoluteY="507dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
