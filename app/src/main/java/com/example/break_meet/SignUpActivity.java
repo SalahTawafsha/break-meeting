@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -66,7 +65,6 @@ public class SignUpActivity extends AppCompatActivity {
     private void fillData(HashMap<String, String> map) {
 
         name.setText(map.get("name"));
-        Log.e("MyDebug", map.toString());
         if (map.get("gender").equals("M"))
             male.setChecked(true);
         else

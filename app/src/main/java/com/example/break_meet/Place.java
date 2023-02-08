@@ -9,6 +9,9 @@ public class Place {
         this.type = type;
     }
 
+    public Place() {
+    }
+
     public String getName() {
         return name;
     }
@@ -23,5 +26,13 @@ public class Place {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    @Override
+    public String toString() {
+        return "Place{" +
+                "name='" + name + '\'' +
+                ", type='" + type + '\'' +
+                '}';
     }
 }

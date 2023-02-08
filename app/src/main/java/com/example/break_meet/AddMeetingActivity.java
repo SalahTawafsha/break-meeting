@@ -1,18 +1,28 @@
 package com.example.break_meet;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import org.checkerframework.checker.units.qual.A;
 
 import java.lang.ref.Reference;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class AddMeetingActivity extends AppCompatActivity {
@@ -36,10 +46,20 @@ public class AddMeetingActivity extends AppCompatActivity {
         date = findViewById(R.id.date);
         description = findViewById(R.id.description);
 
-        fireStore.collection("break_meet").document("Meeting")
-                .get().addOnSuccessListener(e -> {
-                })
-                .addOnFailureListener(e -> {
+        fireStore.collection("places")
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        ArrayList<Place> all = new ArrayList<>();
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                all.add(new Place(document.getData().get("name").toString(), document.getData().get("type").toString()));
+                            }
+                            for (int i = 0; i < all.size(); i++) {
+                                Log.d("hi shella", all.get(i).toString());
+                            }
+                        }
+                    }
 
                 });
 

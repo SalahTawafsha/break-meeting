@@ -29,7 +29,8 @@
 
         <Spinner
             android:id="@+id/type"
-            style="@style/EditText" />
+            style="@style/EditText"
+            android:entries="@array/types" />
 
         <Spinner
             android:id="@+id/place"

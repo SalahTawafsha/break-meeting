@@ -20,7 +20,7 @@ public class HomeActivity extends AppCompatActivity {
 
         linearLayout = findViewById(R.id.linearLayout);
 
-        if (MainActivity.logInID.equals("1200339")) {
+        if ("1200339".equals(MainActivity.logInID)) {
             addPlace = findViewById(R.id.addPlace);
             addPlace.setVisibility(View.VISIBLE);
         }

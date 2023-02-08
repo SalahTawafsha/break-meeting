@@ -1,18 +1,11 @@
 package com.example.break_meet;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.JsonReader;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -62,7 +55,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private String getStudent(String str) {
-        Log.e("MyDebug", str);
         String[] tokens = str.split("[=,]");
         return tokens[5];
     }
