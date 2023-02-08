@@ -23,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
     EditText id;
     EditText password;
 
+    static String logInID;
+
     Map<String, String> map = new HashMap<>();
 
     @Override
@@ -48,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
                         String studentPass = getStudent(e.get(id.getText().toString()).toString());
                         if (studentPass.equals(password.getText().toString())) {
                             Intent intent = new Intent(this, HomeActivity.class);
+                            logInID = id.getText().toString();
                             startActivity(intent);
                         } else
                             Toast.makeText(this, "Uncorrected Password!", Toast.LENGTH_SHORT).show();
@@ -58,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private String getStudent(String str) {
+        Log.e("MyDebug", str);
         String[] tokens = str.split("[=,]");
         return tokens[5];
     }

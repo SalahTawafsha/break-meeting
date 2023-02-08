@@ -43,8 +43,8 @@
             android:inputType="textPersonName" />
 
         <RadioGroup
-            android:layout_width="212dp"
             android:id="@+id/gender"
+            android:layout_width="212dp"
             android:layout_height="wrap_content"
             android:gravity="center">
 
@@ -99,11 +99,13 @@
 
         <Button
             android:id="@+id/button3"
-            android:onClick="add"
             android:layout_width="111dp"
             android:layout_height="69dp"
+            android:onClick="add"
             android:text="@string/sign_up"
             android:textColor="#DC628AB5" />
 
+
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
