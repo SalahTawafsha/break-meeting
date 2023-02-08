@@ -16,4 +16,5 @@
     <string name="select_meeting">select meeting</string>
     <string name="my_meetings">My meetings</string>
     <string name="update_profile">update profile</string>
+    <string name="update">Update</string>
 </resources>
