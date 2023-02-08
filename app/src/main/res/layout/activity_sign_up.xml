@@ -23,7 +23,7 @@
 
 
         <EditText
-            android:id="@+id/editTextTextPersonName2"
+            android:id="@+id/studentId"
             style="@style/EditText"
             android:layout_width="wrap_content"
             android:layout_height="49dp"
@@ -33,22 +33,23 @@
             tools:ignore="Autofill" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName5"
+            android:id="@+id/studentName"
             style="@style/EditText"
             android:layout_width="wrap_content"
             android:layout_height="49dp"
             android:ems="10"
             android:hint="@string/student_name"
-            android:inputType="textPersonName"
-            android:importantForAutofill="no" />
+            android:importantForAutofill="no"
+            android:inputType="textPersonName" />
 
         <RadioGroup
             android:layout_width="212dp"
+            android:id="@+id/gender"
             android:layout_height="wrap_content"
             android:gravity="center">
 
             <RadioButton
-                android:id="@+id/radioButton"
+                android:id="@+id/male"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/male"
@@ -57,7 +58,7 @@
                 android:textStyle="bold" />
 
             <RadioButton
-                android:id="@+id/radioButton2"
+                android:id="@+id/female"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/female"
@@ -77,27 +78,28 @@
             android:onClick="openCal" />
 
         <EditText
-            android:id="@+id/editTextTextPassword3"
+            android:id="@+id/firstPassword"
             style="@style/EditText"
             android:layout_width="wrap_content"
             android:layout_height="41dp"
+            android:autofillHints=""
             android:ems="10"
             android:hint="@string/password"
-            android:inputType="textPassword"
-            android:autofillHints="" />
+            android:inputType="textPassword" />
 
         <EditText
-            android:id="@+id/editTextTextPassword4"
+            android:id="@+id/secondPassword"
             style="@style/EditText"
             android:layout_width="wrap_content"
             android:layout_height="41dp"
+            android:autofillHints=""
             android:ems="10"
             android:hint="@string/rewrite_password"
-            android:inputType="textPassword"
-            android:autofillHints="" />
+            android:inputType="textPassword" />
 
         <Button
             android:id="@+id/button3"
+            android:onClick="add"
             android:layout_width="111dp"
             android:layout_height="69dp"
             android:text="@string/sign_up"

@@ -116,6 +116,7 @@
 
         <Button
             android:id="@+id/button2"
+            android:onClick="logIn"
             android:layout_width="123dp"
             android:layout_height="51dp"
             android:text="@string/log_in"
