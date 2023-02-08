@@ -26,8 +26,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void signUp(View view) throws ClassNotFoundException {
-        Intent intent = new Intent(this,Class.forName("com.example.break_meet.SignUpActivity"));
+    public void signUp(View view) {
+        Intent intent = new Intent(this, SignUpActivity.class);
         startActivity(intent);
 
     }

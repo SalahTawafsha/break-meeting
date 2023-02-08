@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
-    android:gravity="center"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
@@ -37,31 +36,34 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0"
-            app:srcCompat="@drawable/break_meet" />
+            app:srcCompat="@drawable/break_meet"
+            android:contentDescription="@string/todo" />
 
         <EditText
             android:id="@+id/editTextTextPassword"
             style="@style/EditText"
-            android:hint="Passowrd"
+            android:hint="@string/password"
             android:inputType="textPassword"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.503"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.699" />
+            app:layout_constraintVertical_bias="0.699"
+            android:autofillHints="" />
 
         <EditText
             android:id="@+id/editTextTextPersonName"
             style="@style/EditText"
-            android:hint="UserName"
+            android:hint="@string/student_id"
             android:inputType="textPersonName"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.503"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.587" />
+            app:layout_constraintVertical_bias="0.587"
+            android:autofillHints="" />
 
         <TextView
             android:id="@+id/textView2"
@@ -69,7 +71,7 @@
             android:layout_width="220dp"
             android:layout_height="51dp"
             android:fontFamily="@font/comic_neue_bold_italic"
-            android:text="Welcom To Break Meeting"
+            android:text="@string/welcome_to_break_meeting"
             android:textColor="#9F9F9F"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -84,33 +86,45 @@
             android:id="@+id/textView3"
             android:layout_width="184dp"
             android:layout_height="37dp"
-            android:text="haven't Account?"
+            android:text="@string/haven_t_account"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.187"
+            app:layout_constraintHorizontal_bias="0.175"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.852" />
+            app:layout_constraintVertical_bias="0.902" />
 
         <Button
             android:id="@+id/button"
-            android:onClick="signUp"
             android:layout_width="133dp"
             android:layout_height="44dp"
             android:background="#00000000"
-            android:text="Sign Up"
+            android:onClick="signUp"
+            android:text="@string/sign_up"
             android:textAlignment="center"
             android:textColor="#009DFF"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.879"
+            app:layout_constraintHorizontal_bias="0.884"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.851" />
+            app:layout_constraintVertical_bias="0.901" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="123dp"
+            android:layout_height="51dp"
+            android:text="@string/log_in"
+            android:textColor="#9F9F9F"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.803" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
