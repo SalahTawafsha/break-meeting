@@ -5,8 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -14,19 +14,14 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import org.checkerframework.checker.units.qual.A;
-
-import java.lang.ref.Reference;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class AddMeetingActivity extends AppCompatActivity {
-    private Spinner type;
     private Spinner place;
     private EditText time;
     private TextView date;
@@ -40,7 +35,6 @@ public class AddMeetingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_meeting);
 
-        type = findViewById(R.id.type);
         place = findViewById(R.id.place);
         time = findViewById(R.id.time);
         date = findViewById(R.id.date);
@@ -53,11 +47,15 @@ public class AddMeetingActivity extends AppCompatActivity {
                         ArrayList<Place> all = new ArrayList<>();
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                all.add(new Place(document.getData().get("name").toString(), document.getData().get("type").toString()));
+                                HashMap<String, Object> map = (HashMap<String, Object>) document.getData();
+                                HashMap<String, String> p = (HashMap<String, String>) map.get(document.getId());
+
+                                all.add(new Place(p.get("name"), p.get("type")));
                             }
-                            for (int i = 0; i < all.size(); i++) {
-                                Log.d("hi shella", all.get(i).toString());
-                            }
+
+                            ArrayAdapter<Place> adapter = new ArrayAdapter<>(AddMeetingActivity.this, android.R.layout.simple_spinner_item, all);
+
+                            place.setAdapter(adapter);
                         }
                     }
 
@@ -68,11 +66,17 @@ public class AddMeetingActivity extends AppCompatActivity {
     public void add(View view) {
         map.clear();
 
-//        map.put(id.getText().toString(), new Student(Integer.parseInt(id.getText().toString()), firstPass.getText().toString(), name.getText().toString(),
-//                (gender.getCheckedRadioButtonId() == R.id.male) ? "M" : "F", date.getText().toString()));
-//        fireStore.collection("break_meet").document("student").set(map)
-//                .addOnSuccessListener(e -> Toast.makeText(this, "successful", Toast.LENGTH_SHORT).show())
-//                .addOnFailureListener(e -> Toast.makeText(this, "failed", Toast.LENGTH_SHORT).show());
+        fireStore.collection("meetings")
+                .add(new Meeting(
+                        ((Place) place.getSelectedItem()).getType()
+                        , ((Place) place.getSelectedItem()).getName()
+                        , time.getText().toString(), date.getText().toString()
+                        , description.getText().toString(), MainActivity.logInID + ""))
+                .addOnSuccessListener(documentReference -> {
+                    Toast.makeText(this, "Added!", Toast.LENGTH_SHORT).show();
+                }).addOnFailureListener(e -> {
+                    Toast.makeText(this, "Can't add", Toast.LENGTH_SHORT).show();
+                });
 
     }
 

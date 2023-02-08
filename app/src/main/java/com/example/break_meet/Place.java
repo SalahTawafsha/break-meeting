@@ -30,9 +30,7 @@ public class Place {
 
     @Override
     public String toString() {
-        return "Place{" +
-                "name='" + name + '\'' +
-                ", type='" + type + '\'' +
-                '}';
+        return name +
+                ", " + type;
     }
 }

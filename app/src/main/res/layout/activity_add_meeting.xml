@@ -28,11 +28,6 @@
             android:text="@string/add_meeting"/>
 
         <Spinner
-            android:id="@+id/type"
-            style="@style/EditText"
-            android:entries="@array/types" />
-
-        <Spinner
             android:id="@+id/place"
             style="@style/EditText"/>
 

@@ -24,6 +24,7 @@
     <string name="add_place">Add Place</string>
     <string name="place_id">Place ID</string>
     <string name="place_name">Place Name</string>
+    <string name="done">Done</string>
 
     <array name="types">
         <item>Select Type</item>
