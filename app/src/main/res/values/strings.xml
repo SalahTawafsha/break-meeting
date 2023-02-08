@@ -21,4 +21,15 @@
     <string name="time_of_meeting">Time of Meeting</string>
     <string name="description">Description</string>
     <string name="add">Add</string>
+    <string name="add_place">Add Place</string>
+    <string name="place_id">Place ID</string>
+    <string name="place_name">Place Name</string>
+
+    <array name="types">
+        <item>Select Type</item>
+        <item>Cafeteria</item>
+        <item>Collage</item>
+        <item>Street</item>
+        <item>Library</item>
+    </array>
 </resources>

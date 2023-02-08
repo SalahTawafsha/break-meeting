@@ -24,6 +24,13 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <Button
+            android:id="@+id/addPlace"
+            android:onClick="addPlace"
+            style="@style/button"
+            android:text="@string/add_place"
+            android:visibility="gone" />
+
+        <Button
             android:onClick="add"
             style="@style/button"
             android:text="@string/add_meeting" />
