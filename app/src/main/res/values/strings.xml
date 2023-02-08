@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">break-meet</string>
+    <string name="student_id">Student ID</string>
+    <string name="student_name">Student Name</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="date_of_birth">Date Of Birth</string>
+    <string name="password">Password</string>
+    <string name="rewrite_password">Rewrite password</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="todo">TODO</string>
+    <string name="welcome_to_break_meeting">Welcome To Break Meeting</string>
+    <string name="haven_t_account">haven\'t Account?</string>
+    <string name="log_in">Log In</string>
 </resources>
