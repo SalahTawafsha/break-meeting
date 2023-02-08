@@ -12,4 +12,8 @@
     <string name="welcome_to_break_meeting">Welcome To Break Meeting</string>
     <string name="haven_t_account">haven\'t Account?</string>
     <string name="log_in">Log In</string>
+    <string name="add_meeting">add meeting</string>
+    <string name="select_meeting">select meeting</string>
+    <string name="my_meetings">My meetings</string>
+    <string name="update_profile">update profile</string>
 </resources>
