@@ -4,19 +4,19 @@ package com.example.break_meet;
 import androidx.annotation.NonNull;
 
 public class Student {
-	private int Id_student;
+	private String Id_student;
 	private String name;
 	private String password;
 
 	private String gender;
 	private String date;
-	private int visStudentId;
+	private String visStudentId;
 
 	public Student() {
 		super();
 	}
 
-	public Student(int id_student,String password, String name, String gender, String date,int visStudentId) {
+	public Student(String id_student,String password, String name, String gender, String date,String visStudentId) {
 		super();
 		Id_student = id_student;
 		this.name = name;
@@ -25,7 +25,7 @@ public class Student {
 		this.visStudentId=visStudentId;
 		this.password=password;
 	}
-	public Student(int id_student,String password, String name, String gender, String date) {
+	public Student(String id_student,String password, String name, String gender, String date) {
 		super();
 		Id_student = id_student;
 		this.name = name;
@@ -34,16 +34,16 @@ public class Student {
 		this.password=password;
 	}
 
-	public Student(int id_student,String password) {
+	public Student(String id_student,String password) {
 		Id_student = id_student;
 		this.password=password;
 	}
 
-	public int getId_student() {
+	public String getId_student() {
 		return Id_student;
 	}
 
-	public void setId_student(int id_student) {
+	public void setId_student(String id_student) {
 		Id_student = id_student;
 	}
 
@@ -70,11 +70,11 @@ public class Student {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	public int getVisStudentId() {
+	public String getVisStudentId() {
 		return visStudentId;
 	}
 
-	public void setVisStudentId(int visStudentId) {
+	public void setVisStudentId(String visStudentId) {
 		this.visStudentId = visStudentId;
 	}
 

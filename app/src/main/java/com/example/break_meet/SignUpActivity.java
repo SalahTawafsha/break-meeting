@@ -50,30 +50,33 @@ public class SignUpActivity extends AppCompatActivity {
         if (getIntent().getStringExtra("type").equals("update")) {
             add.setText(R.string.update);
             id.setText(MainActivity.logInID);
-            fireStore.collection("break_meet").document("student")
+            fireStore.collection("break_meet").document(MainActivity.logInID)
                     .get().addOnSuccessListener(e -> {
-                        Log.e("MYDebug", e.get(id.getText().toString()).toString());
-                        fillData(e.get(id.getText().toString()));
+
+
+                        HashMap<String, String> s = (HashMap<String, String>) e.get(MainActivity.logInID);
+
+
+                        fillData(s);
                     });
         }
 
     }
 
-    private void fillData(Object o) {
-        String[] tokens = o.toString().split("[=,]");
+    private void fillData(HashMap<String, String> map) {
 
-        name.setText(tokens[9]);
-        if (tokens[7].equals("M"))
+        name.setText(map.get("name"));
+        Log.e("MyDebug", map.toString());
+        if (map.get("gender").equals("M"))
             male.setChecked(true);
         else
             female.setChecked(true);
-        date.setText(tokens[3]);
+        date.setText(map.get("date"));
 
         firstPass.setHint("Old Password");
         secondPass.setHint("New Password");
 
-        s = new Student(Integer.parseInt(id.getText().toString()), tokens[5]);
-
+        s = new Student(map.get("id_student"), map.get("password"), map.get("name"), map.get("gender"), map.get("date"));
     }
 
     @Override
@@ -95,10 +98,10 @@ public class SignUpActivity extends AppCompatActivity {
     public void add(View view) {
         if (getIntent().getStringExtra("type").equals("update")) {
             if (firstPass.getText().toString().equals(s.getPassword())) {
-                s = new Student(Integer.parseInt(id.getText().toString()),
+                s = new Student(id.getText().toString(),
                         (!secondPass.getText().toString().isEmpty()) ? secondPass.getText().toString() : s.getPassword(), name.getText().toString(),
                         (gender.getCheckedRadioButtonId() == R.id.male) ? "M" : "F", date.getText().toString());
-                fireStore.collection("break_meet").document("student")
+                fireStore.collection("break_meet").document(MainActivity.logInID)
                         .update(id.getText().toString(), s);
                 Toast.makeText(this, "successful", Toast.LENGTH_SHORT).show();
             }
@@ -108,9 +111,11 @@ public class SignUpActivity extends AppCompatActivity {
             map.clear();
 
             if (firstPass.getText().toString().equals(secondPass.getText().toString())) {
-                map.put(id.getText().toString(), new Student(Integer.parseInt(id.getText().toString()), firstPass.getText().toString(), name.getText().toString(),
+                map.put(id.getText().toString(), new Student(id.getText().toString(), firstPass.getText().toString(), name.getText().toString(),
                         (gender.getCheckedRadioButtonId() == R.id.male) ? "M" : "F", date.getText().toString()));
-                fireStore.collection("break_meet").document("student").set(map)
+
+
+                fireStore.collection("break_meet").document(id.getText().toString()).set(map)
                         .addOnSuccessListener(e -> Toast.makeText(this, "successful", Toast.LENGTH_SHORT).show())
                         .addOnFailureListener(e -> Toast.makeText(this, "failed", Toast.LENGTH_SHORT).show());
             }

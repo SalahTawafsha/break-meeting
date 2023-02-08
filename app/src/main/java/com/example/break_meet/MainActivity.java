@@ -39,12 +39,13 @@ public class MainActivity extends AppCompatActivity {
 
     public void signUp(View view) {
         Intent intent = new Intent(this, SignUpActivity.class);
+        intent.putExtra("type", "add");
         startActivity(intent);
 
     }
 
     public void logIn(View view) {
-        fireStore.collection("break_meet").document("student")
+        fireStore.collection("break_meet").document(id.getText().toString())
                 .get().addOnSuccessListener(e -> {
                     if (e.get(id.getText().toString()) != null) {
                         String studentPass = getStudent(e.get(id.getText().toString()).toString());

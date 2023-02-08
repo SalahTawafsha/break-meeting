@@ -27,6 +27,38 @@
             style="@style/TextView"
             android:text="@string/add_meeting"/>
 
+        <Spinner
+            android:id="@+id/type"
+            style="@style/EditText" />
+
+        <Spinner
+            android:id="@+id/place"
+            style="@style/EditText"/>
+
+        <EditText
+            android:id="@+id/time"
+            style="@style/EditText"
+            android:hint="@string/time_of_meeting"
+            android:inputType="time"
+            tools:ignore="Autofill" />
+
+        <TextView
+            android:id="@+id/date"
+            android:onClick="openCal"
+            style="@style/TextView"
+            android:hint="@string/date_of_meeting" />
+
+        <EditText
+            style="@style/TextView"
+            android:id="@+id/description"
+            android:hint="@string/description"
+            tools:ignore="Autofill,TextFields" />
+
+        <Button
+            android:onClick="add"
+            style="@style/button"
+            android:text="@string/add"/>
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

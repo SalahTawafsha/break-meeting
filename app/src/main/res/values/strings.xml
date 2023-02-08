@@ -17,4 +17,8 @@
     <string name="my_meetings">My meetings</string>
     <string name="update_profile">update profile</string>
     <string name="update">Update</string>
+    <string name="date_of_meeting">Date Of Meeting</string>
+    <string name="time_of_meeting">Time of Meeting</string>
+    <string name="description">Description</string>
+    <string name="add">Add</string>
 </resources>
