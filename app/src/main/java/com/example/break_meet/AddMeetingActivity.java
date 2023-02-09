@@ -20,6 +20,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class AddMeetingActivity extends AppCompatActivity {
     private Spinner place;
@@ -44,19 +45,11 @@ public class AddMeetingActivity extends AppCompatActivity {
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        ArrayList<Place> all = new ArrayList<>();
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                HashMap<String, Object> map = (HashMap<String, Object>) document.getData();
-                                HashMap<String, String> p = (HashMap<String, String>) map.get(document.getId());
+                        List<Place> all = task.getResult().toObjects(Place.class);
 
-                                all.add(new Place(p.get("name"), p.get("type")));
-                            }
+                        ArrayAdapter<Place> adapter = new ArrayAdapter<>(AddMeetingActivity.this, android.R.layout.simple_spinner_item, all);
 
-                            ArrayAdapter<Place> adapter = new ArrayAdapter<>(AddMeetingActivity.this, android.R.layout.simple_spinner_item, all);
-
-                            place.setAdapter(adapter);
-                        }
+                        place.setAdapter(adapter);
                     }
 
                 });

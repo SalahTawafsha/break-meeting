@@ -69,4 +69,16 @@ public class Meeting {
     public void setDes(String des) {
         this.des = des;
     }
+
+    @Override
+    public String toString() {
+        return "Meeting{" +
+                "type='" + type + '\'' +
+                ", placeName='" + placeName + '\'' +
+                ", fromTime='" + fromTime + '\'' +
+                ", date='" + date + '\'' +
+                ", des='" + des + '\'' +
+                ", studentId='" + studentId + '\'' +
+                '}';
+    }
 }

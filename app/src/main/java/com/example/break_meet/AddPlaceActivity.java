@@ -33,9 +33,7 @@ public class AddPlaceActivity extends AppCompatActivity {
 
     public void add(View view) {
 
-        map.put(placeID.getText().toString() + "", new Place(placeName.getText().toString(), type.getSelectedItem().toString()));
-
-        fireStore.collection("places").document(placeID.getText().toString()).set(map)
+        fireStore.collection("places").add(new Place(placeName.getText().toString(), type.getSelectedItem().toString()))
                 .addOnSuccessListener(e -> {
                     Toast.makeText(this, "Successful!", Toast.LENGTH_SHORT).show();
                 })

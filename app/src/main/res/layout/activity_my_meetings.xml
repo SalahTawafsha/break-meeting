@@ -26,6 +26,17 @@
             style="@style/EditText"
             android:text="@string/my_meetings"/>
 
+
+        <ListView
+            android:id="@+id/myMeetingList"
+            android:layout_width="match_parent"
+            android:layout_height="345dp" />
+
+        <Button
+            android:onClick="delete"
+            style="@style/button"
+            android:text="@string/delete_meeting" />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
