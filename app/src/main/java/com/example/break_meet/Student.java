@@ -3,11 +3,12 @@ package com.example.break_meet;
 
 import androidx.annotation.NonNull;
 
+import java.util.Objects;
+
 public class Student {
 	private String Id_student;
 	private String name;
 	private String password;
-
 	private String gender;
 	private String date;
 	private String visStudentId;
@@ -96,7 +97,7 @@ public class Student {
 	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof Student)
-			return ((Student) obj).getId_student()== this.getId_student();
+			return Objects.equals(((Student) obj).getId_student(), this.getId_student());
 		return super.equals(obj);
 	}
 

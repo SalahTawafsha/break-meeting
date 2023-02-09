@@ -28,16 +28,6 @@
             style="@style/EditText"/>
 
         <EditText
-            android:id="@+id/placeId"
-            style="@style/EditText"
-            android:layout_width="wrap_content"
-            android:layout_height="49dp"
-            android:ems="10"
-            android:hint="@string/place_id"
-            android:inputType="textPersonName"
-            tools:ignore="Autofill" />
-
-        <EditText
             android:id="@+id/placeName"
             style="@style/EditText"
             android:layout_width="wrap_content"

@@ -15,11 +15,8 @@ import java.util.HashMap;
 public class AddPlaceActivity extends AppCompatActivity {
     private EditText placeName;
     private Spinner type;
-    private EditText placeID;
-    private static int numOfObjects;
 
-    private FirebaseFirestore fireStore = FirebaseFirestore.getInstance();
-    private HashMap<String, Place> map = new HashMap<>();
+    private final FirebaseFirestore fireStore = FirebaseFirestore.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,17 +25,12 @@ public class AddPlaceActivity extends AppCompatActivity {
 
         placeName = findViewById(R.id.placeName);
         type = findViewById(R.id.typeOfPlace);
-        placeID = findViewById(R.id.placeId);
     }
 
     public void add(View view) {
 
         fireStore.collection("places").add(new Place(placeName.getText().toString(), type.getSelectedItem().toString()))
-                .addOnSuccessListener(e -> {
-                    Toast.makeText(this, "Successful!", Toast.LENGTH_SHORT).show();
-                })
-                .addOnFailureListener(e -> {
-                    Toast.makeText(this, "Place ID is already exist!", Toast.LENGTH_SHORT).show();
-                });
+                .addOnSuccessListener(e -> Toast.makeText(this, "Successful!", Toast.LENGTH_SHORT).show())
+                .addOnFailureListener(e -> Toast.makeText(this, "Place ID is already exist!", Toast.LENGTH_SHORT).show());
     }
 }

@@ -52,9 +52,7 @@ public class SignUpActivity extends AppCompatActivity {
             fireStore.collection("break_meet").document(MainActivity.logInID)
                     .get().addOnSuccessListener(e -> {
 
-
                         HashMap<String, String> s = (HashMap<String, String>) e.get(MainActivity.logInID);
-
 
                         fillData(s);
                     });
@@ -102,7 +100,11 @@ public class SignUpActivity extends AppCompatActivity {
                 fireStore.collection("break_meet").document(MainActivity.logInID)
                         .update(id.getText().toString(), s);
                 Toast.makeText(this, "successful", Toast.LENGTH_SHORT).show();
-            }
+            }else if(firstPass.getText().toString().isEmpty())
+                Toast.makeText(this, "Enter Old password to save", Toast.LENGTH_SHORT).show();
+            else
+                Toast.makeText(this, "Uncorrected Password", Toast.LENGTH_SHORT).show();
+
         } else {
 
 
