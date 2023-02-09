@@ -1,5 +1,9 @@
 package com.example.break_meet;
 
+import androidx.annotation.NonNull;
+
+import java.util.Objects;
+
 public class Meeting {
     private String type;
     private String placeName;
@@ -70,15 +74,27 @@ public class Meeting {
         this.des = des;
     }
 
+    @NonNull
     @Override
     public String toString() {
-        return "Meeting{" +
-                "type='" + type + '\'' +
-                ", placeName='" + placeName + '\'' +
-                ", fromTime='" + fromTime + '\'' +
-                ", date='" + date + '\'' +
-                ", des='" + des + '\'' +
-                ", studentId='" + studentId + '\'' +
-                '}';
+        return placeName +
+                ", " + date +
+                ", " + fromTime +
+                ", " + des +
+                ", " + type +
+                ", " + studentId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Meeting meeting = (Meeting) o;
+        return type.equals(meeting.type) && placeName.equals(meeting.placeName) && fromTime.equals(meeting.fromTime) && date.equals(meeting.date) && des.equals(meeting.des) && studentId.equals(meeting.studentId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(type, placeName, fromTime, date, des, studentId);
     }
 }

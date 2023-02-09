@@ -7,19 +7,24 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.List;
 
 public class MyMeetingsActivity extends AppCompatActivity {
     private ListView list;
-    private FirebaseFirestore fireStore = FirebaseFirestore.getInstance();
+    private final FirebaseFirestore fireStore = FirebaseFirestore.getInstance();
     private List<Meeting> all;
+    private Meeting meeting;
+    private Button delete;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,28 +33,43 @@ public class MyMeetingsActivity extends AppCompatActivity {
 
 
         list = findViewById(R.id.myMeetingList);
+        delete = findViewById(R.id.delete);
 
         fireStore.collection("meetings")
-                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        all = task.getResult().toObjects(Meeting.class);
+                .get().addOnCompleteListener(task -> {
+                    all = task.getResult().toObjects(Meeting.class);
 
-
-                        ArrayAdapter<Meeting> adapter = new ArrayAdapter<>(MyMeetingsActivity.this, android.R.layout.simple_spinner_item, all);
-
-                        list.setAdapter(adapter);
-
+                    for (int i = 0; i < all.size(); i++) {
+                        if (!all.get(i).getStudentId().equals(MainActivity.logInID))
+                            all.remove(i--);
                     }
+
+                    ArrayAdapter<Meeting> adapter = new ArrayAdapter<>(MyMeetingsActivity.this, android.R.layout.simple_spinner_item, all);
+
+                    list.setAdapter(adapter);
 
                 });
 
         list.setOnItemClickListener((adapterView, view, i, l) -> {
-            Log.e("MMyError", all.get(i).toString());
-
+            meeting = all.get(i);
+            delete.setEnabled(true);
         });
     }
 
     public void delete(View view) {
+        fireStore.collection("meetings").get()
+                .addOnCompleteListener(task -> {
+
+                    for (QueryDocumentSnapshot o : task.getResult()) {
+                        if (o.toObject(Meeting.class).equals(meeting)) {
+                            fireStore.collection("meetings").document(o.getId()).delete();
+                            return;
+                        }
+                    }
+                });
+
+        Toast.makeText(this, "Deleted!", Toast.LENGTH_SHORT).show();
     }
+
+
 }
