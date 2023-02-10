@@ -63,7 +63,7 @@ public class SignUpActivity extends AppCompatActivity {
     private void fillData(HashMap<String, String> map) {
 
         name.setText(map.get("name"));
-        if (map.get("gender").equals("M"))
+        if ("M".equals(map.get("gender")))
             male.setChecked(true);
         else
             female.setChecked(true);
