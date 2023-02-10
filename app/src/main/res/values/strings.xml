@@ -26,6 +26,7 @@
     <string name="place_name">Place Name</string>
     <string name="done">Done</string>
     <string name="delete_meeting">Delete Meeting</string>
+    <string name="send_request">Send Request</string>
 
     <array name="types">
         <item>Select Type</item>

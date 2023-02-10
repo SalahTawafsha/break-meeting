@@ -24,7 +24,21 @@
 
         <TextView
             style="@style/EditText"
-            android:text="@string/select_meeting"/>
+            android:text="@string/my_meetings"/>
+
+
+        <ListView
+            android:id="@+id/myMeetingList"
+            android:layout_width="match_parent"
+            android:layout_height="345dp"
+            android:background="@color/edit_text_background" />
+
+        <Button
+            android:id="@+id/select"
+            style="@style/button"
+            android:enabled="false"
+            android:onClick="selectMeeting"
+            android:text="@string/send_request" />
 
     </LinearLayout>
 
