@@ -27,6 +27,8 @@
     <string name="done">Done</string>
     <string name="delete_meeting">Delete Meeting</string>
     <string name="send_request">Send Request</string>
+    <string name="meeting_request">Meeting Request:</string>
+    <string name="someone_request_to_show_you">Someone request to show you</string>
 
     <array name="types">
         <item>Select Type</item>
