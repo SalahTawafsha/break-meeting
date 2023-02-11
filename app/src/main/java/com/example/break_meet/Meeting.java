@@ -62,7 +62,7 @@ public class Meeting {
     }
 
     public Date getFromTime() {
-        return new Date(fromTime.getSeconds() * 1000);
+        return new Date(fromTime.getSeconds() * 1000 + fromTime.getNanoseconds());
     }
 
     public void setFromTime(Timestamp fromTime) {
