@@ -5,14 +5,16 @@ import androidx.annotation.NonNull;
 public class Request {
     private String fromStudent;
     private String toStudent;
+    private String meetingID;
 
 
     public Request() {
     }
 
-    public Request(String fromStudent, String toStudent) {
+    public Request(String fromStudent, String toStudent, String meetingID) {
         this.fromStudent = fromStudent;
         this.toStudent = toStudent;
+        this.meetingID = meetingID;
     }
 
     public String getFromStudent() {
@@ -21,6 +23,14 @@ public class Request {
 
     public void setFromStudent(String fromStudent) {
         this.fromStudent = fromStudent;
+    }
+
+    public String getMeetingID() {
+        return meetingID;
+    }
+
+    public void setMeetingID(String meetingID) {
+        this.meetingID = meetingID;
     }
 
     public String getToStudent() {
@@ -35,6 +45,6 @@ public class Request {
     @Override
     public String toString() {
         return fromStudent +
-                ", " + toStudent;
+                ", " + meetingID;
     }
 }

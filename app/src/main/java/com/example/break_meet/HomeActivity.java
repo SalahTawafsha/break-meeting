@@ -51,4 +51,9 @@ public class HomeActivity extends AppCompatActivity {
         Intent intent = new Intent(this, AddPlaceActivity.class);
         startActivity(intent);
     }
+
+    public void showRequests(View view) {
+        Intent intent = new Intent(this, RequestToMeActivity.class);
+        startActivity(intent);
+    }
 }

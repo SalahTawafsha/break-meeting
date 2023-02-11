@@ -29,6 +29,10 @@
     <string name="send_request">Send Request</string>
     <string name="meeting_request">Meeting Request:</string>
     <string name="someone_request_to_show_you">Someone request to show you</string>
+    <string name="all_meetings">All Meetings</string>
+    <string name="requests_to_me">Requests To Me</string>
+    <string name="reject">Reject</string>
+    <string name="approval">approval</string>
 
     <array name="types">
         <item>Select Type</item>

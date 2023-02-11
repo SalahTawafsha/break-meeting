@@ -41,6 +41,11 @@
             android:text="@string/select_meeting" />
 
         <Button
+            android:onClick="showRequests"
+            style="@style/button"
+            android:text="@string/requests_to_me" />
+
+        <Button
             android:onClick="myMeetings"
             style="@style/button"
             android:text="@string/my_meetings" />

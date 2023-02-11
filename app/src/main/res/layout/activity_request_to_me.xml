@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
-    tools:context=".SelectMeetingActivity">
+    tools:context=".RequestToMeActivity">
 
     <LinearLayout
         android:id="@+id/linearLayout2"
@@ -24,7 +24,7 @@
 
         <TextView
             style="@style/EditText"
-            android:text="@string/all_meetings"/>
+            android:text="@string/requests_to_me"/>
 
 
         <ListView
@@ -33,12 +33,28 @@
             android:layout_height="345dp"
             android:background="@color/edit_text_background" />
 
-        <Button
-            android:id="@+id/select"
-            style="@style/button"
-            android:enabled="false"
-            android:onClick="selectMeeting"
-            android:text="@string/send_request" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/reject"
+                style="@style/button"
+                android:enabled="false"
+                android:onClick="reject"
+                android:text="@string/reject" />
+
+            <Button
+                android:id="@+id/approval"
+                style="@style/button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:onClick="approval"
+                android:text="@string/approval" />
+        </LinearLayout>
 
     </LinearLayout>
 

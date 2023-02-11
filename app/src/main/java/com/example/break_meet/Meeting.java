@@ -11,6 +11,7 @@ public class Meeting {
     private String date;
     private String des;
     private String studentId;
+    private String secondStudentId;
 
     public Meeting() {
     }
@@ -24,6 +25,15 @@ public class Meeting {
         this.date = date;
         this.des = des;
         this.studentId = studentId;
+        secondStudentId = "";
+    }
+
+    public String getSecondStudentId() {
+        return secondStudentId;
+    }
+
+    public void setSecondStudentId(String secondStudentId) {
+        this.secondStudentId = secondStudentId;
     }
 
     public String getStudentId() {
