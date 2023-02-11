@@ -26,33 +26,33 @@
         <Button
             android:id="@+id/addPlace"
             android:onClick="addPlace"
-            style="@style/button"
+            style="@style/myButton"
             android:text="@string/add_place"
             android:visibility="gone" />
 
         <Button
             android:onClick="add"
-            style="@style/button"
+            style="@style/myButton"
             android:text="@string/add_meeting" />
 
         <Button
             android:onClick="select"
-            style="@style/button"
+            style="@style/myButton"
             android:text="@string/select_meeting" />
 
         <Button
             android:onClick="showRequests"
-            style="@style/button"
+            style="@style/myButton"
             android:text="@string/requests_to_me" />
 
         <Button
             android:onClick="myMeetings"
-            style="@style/button"
+            style="@style/myButton"
             android:text="@string/my_meetings" />
 
         <Button
             android:onClick="updateProfile"
-            style="@style/button"
+            style="@style/myButton"
             android:text="@string/update_profile" />
 
 

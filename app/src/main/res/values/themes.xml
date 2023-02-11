@@ -2,8 +2,8 @@
     <!-- Base application theme. -->
     <style name="Theme.Breakmeet" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/edit_text_background</item>
-        <item name="colorPrimaryVariant">@color/edit_text_background</item>
+        <item name="colorPrimary">@color/button_background</item>
+        <item name="colorPrimaryVariant">@color/button_background</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
@@ -38,9 +38,9 @@
         <item name="android:importantForAutofill">no</item>
     </style>
 
-    <style name="button">
+    <style name="myButton">
         <item name="android:layout_height">50dp</item>
-        <item name="android:background">@color/edit_text_background</item>
+        <item name="android:background">@color/button_background</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:ems">10</item>
         <item name="android:layout_margin">10dp</item>

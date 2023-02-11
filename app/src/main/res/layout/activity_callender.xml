@@ -18,7 +18,7 @@
     <Button
         android:onClick="selectDate"
         android:layout_gravity="center"
-        style="@style/button"
+        style="@style/myButton"
         android:text="@string/done" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

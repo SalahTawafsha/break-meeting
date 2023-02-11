@@ -24,18 +24,18 @@
 
         <TextView
             style="@style/EditText"
-            android:text="@string/my_meetings"/>
+            android:text="@string/my_meetings" />
 
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/myMeetingList"
-            android:layout_width="match_parent"
+            android:layout_width="326dp"
             android:layout_height="345dp"
-            android:background="@color/edit_text_background" />
+            android:background="@android:color/transparent" />
 
         <Button
             android:id="@+id/delete"
-            style="@style/button"
+            style="@style/myButton"
             android:enabled="false"
             android:onClick="delete"
             android:text="@string/delete_meeting" />

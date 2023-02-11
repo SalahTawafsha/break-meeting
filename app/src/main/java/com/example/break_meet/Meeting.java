@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 
 import com.google.firebase.Timestamp;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 
@@ -61,8 +62,10 @@ public class Meeting {
         this.placeName = placeName;
     }
 
-    public Date getFromTime() {
-        return new Date(fromTime.getSeconds() * 1000 + fromTime.getNanoseconds());
+    public String getFromTime() {
+        Date date = new Date(fromTime.getSeconds() * 1000 + fromTime.getNanoseconds());
+
+        return new SimpleDateFormat("dd-MM-yyyy").format(date) +" at "+ new SimpleDateFormat("HH:MM").format(date);
     }
 
     public void setFromTime(Timestamp fromTime) {

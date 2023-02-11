@@ -52,7 +52,7 @@
 
         <Button
             android:onClick="add"
-            style="@style/button"
+            style="@style/myButton"
             android:text="@string/add"/>
 
     </LinearLayout>

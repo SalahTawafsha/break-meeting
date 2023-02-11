@@ -3,6 +3,10 @@ package com.example.break_meet;
 
 import androidx.annotation.NonNull;
 
+import com.google.firebase.Timestamp;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Objects;
 
 public class Student {
@@ -10,13 +14,13 @@ public class Student {
     private String name;
     private String password;
     private String gender;
-    private String date;
+    private Timestamp date;
 
     public Student() {
         super();
     }
 
-    public Student(String id_student, String password, String name, String gender, String date) {
+    public Student(String id_student, String password, String name, String gender, Timestamp date) {
         super();
         this.id_student = id_student;
         this.name = name;
@@ -64,10 +68,12 @@ public class Student {
 
 
     public String getDate() {
-        return date;
+        Date date = new Date(this.date.getSeconds() * 1000 + this.date.getNanoseconds());
+
+        return new SimpleDateFormat("dd-MM-yyyy").format(date) +" at "+ new SimpleDateFormat("HH:MM").format(date);
     }
 
-    public void setDate(String date) {
+    public void setDate(Timestamp date) {
         this.date = date;
     }
 

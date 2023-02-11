@@ -30,12 +30,11 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/myMeetingList"
             android:layout_width="match_parent"
-            android:layout_height="345dp"
-            android:background="@color/edit_text_background" />
+            android:layout_height="345dp"/>
 
         <Button
             android:id="@+id/select"
-            style="@style/button"
+            style="@style/myButton"
             android:enabled="false"
             android:onClick="selectMeeting"
             android:text="@string/send_request" />
