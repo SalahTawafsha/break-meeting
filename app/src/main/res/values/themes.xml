@@ -1,7 +1,7 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="Theme.Breakmeet" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <!-- Primary brand color. -->
+    <style name="Theme.Breakmeet" parent="Theme.AppCompat.Light.NoActionBar">
+<!--         Primary brand color. -->
         <item name="colorPrimary">@color/button_background</item>
         <item name="colorPrimaryVariant">@color/button_background</item>
         <item name="colorOnPrimary">@color/white</item>
@@ -30,7 +30,7 @@
         <item name="android:layout_width">200dp</item>
         <item name="android:layout_height">50dp</item>
         <item name="android:ems">10</item>
-        <item name="android:background">@color/edit_text_background</item>
+        <item name="android:background">@drawable/edit_text</item>
         <item name="android:layout_margin">10dp</item>
         <item name="android:gravity">center</item>
         <item name="android:textColor">#FFFFFF</item>
@@ -40,7 +40,7 @@
 
     <style name="myButton">
         <item name="android:layout_height">50dp</item>
-        <item name="android:background">@color/button_background</item>
+        <item name="android:background">@drawable/button</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:ems">10</item>
         <item name="android:layout_margin">10dp</item>

@@ -25,13 +25,11 @@
         <Spinner
             android:id="@+id/typeOfPlace"
             android:entries="@array/types"
-            style="@style/EditText"/>
+            style="@style/TextView"/>
 
         <EditText
             android:id="@+id/placeName"
-            style="@style/EditText"
-            android:layout_width="wrap_content"
-            android:layout_height="49dp"
+            style="@style/TextView"
             android:ems="10"
             android:hint="@string/place_name"
             android:importantForAutofill="no"

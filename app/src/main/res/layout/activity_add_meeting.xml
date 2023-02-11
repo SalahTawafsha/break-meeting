@@ -29,11 +29,11 @@
 
         <Spinner
             android:id="@+id/place"
-            style="@style/EditText"/>
+            style="@style/TextView"/>
 
         <EditText
             android:id="@+id/time"
-            style="@style/EditText"
+            style="@style/TextView"
             android:hint="@string/time_of_meeting"
             android:inputType="time"
             tools:ignore="Autofill" />

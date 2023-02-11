@@ -12,4 +12,6 @@
 
     <color name="edit_text_background">#60AE51</color>
     <color name="button_background">#80BF73</color>
+    <color name="green">#578F49</color>
+    <color name="brown">#B1714E</color>
 </resources>

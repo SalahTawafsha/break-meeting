@@ -41,7 +41,7 @@
 
         <EditText
             android:id="@+id/editTextTextPassword"
-            style="@style/EditText"
+            style="@style/TextView"
             android:hint="@string/password"
             android:inputType="textPassword"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -54,7 +54,7 @@
 
         <EditText
             android:id="@+id/editTextTextPersonName"
-            style="@style/EditText"
+            style="@style/TextView"
             android:hint="@string/student_id"
             android:inputType="textPersonName"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -67,9 +67,7 @@
 
         <TextView
             android:id="@+id/textView2"
-            style="@style/EditText"
-            android:layout_width="220dp"
-            android:layout_height="51dp"
+            style="@style/TextView"
             android:fontFamily="@font/comic_neue_bold_italic"
             android:text="@string/welcome_to_break_meeting"
             android:textColor="@color/white"
@@ -84,8 +82,8 @@
 
         <TextView
             android:id="@+id/textView3"
-            android:layout_width="184dp"
-            android:layout_height="37dp"
+            android:layout_width="181dp"
+            android:layout_height="35dp"
             android:text="@string/haven_t_account"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
@@ -105,19 +103,18 @@
             android:onClick="signUp"
             android:text="@string/sign_up"
             android:textAlignment="center"
-            android:textColor="@color/edit_text_background"
+            android:textColor="#0055FF"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.884"
+            app:layout_constraintHorizontal_bias="0.925"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.901" />
 
         <Button
+            style="@style/myButton"
             android:id="@+id/button2"
-            android:layout_width="123dp"
-            android:layout_height="51dp"
             android:onClick="logIn"
             android:text="@string/log_in"
             android:textColor="@color/white"
