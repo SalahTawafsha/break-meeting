@@ -27,7 +27,7 @@
             android:text="@string/my_meetings"/>
 
 
-        <ListView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/myMeetingList"
             android:layout_width="match_parent"
             android:layout_height="345dp"

@@ -50,7 +50,7 @@ public class SelectMeetingActivity extends AppCompatActivity {
 
 
                     list.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-                    MeetingAdapter adapter = new MeetingAdapter(all);
+                    MeetingAdapter adapter = new MeetingAdapter(all,true);
 
                     list.setAdapter(adapter);
 
