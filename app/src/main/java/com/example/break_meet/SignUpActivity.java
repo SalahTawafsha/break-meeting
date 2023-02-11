@@ -15,8 +15,6 @@ import android.widget.Toast;
 
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.HashMap;
-
 public class SignUpActivity extends AppCompatActivity {
     private TextView date;
     private EditText name;
@@ -28,6 +26,7 @@ public class SignUpActivity extends AppCompatActivity {
     private EditText secondPass;
     private Student s;
     private final FirebaseFirestore fireStore = FirebaseFirestore.getInstance();
+    private String ID;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -51,6 +50,7 @@ public class SignUpActivity extends AppCompatActivity {
             fireStore.collection("students").whereEqualTo("id_student",MainActivity.logInID)
                     .get().addOnCompleteListener(task->{
                        s = task.getResult().toObjects(Student.class).get(0);
+                       ID = task.getResult().getDocuments().get(0).getId();
                        fillData();
                     });
         }
@@ -95,8 +95,8 @@ public class SignUpActivity extends AppCompatActivity {
                                 : s.getPassword(), name.getText().toString(),
                         (gender.getCheckedRadioButtonId() == R.id.male) ? "M" : "F", date.getText().toString());
 
-                fireStore.collection("students").document(MainActivity.logInID)
-                        .update(id.getText().toString(), s);
+                fireStore.collection("students").document(ID)
+                        .set(s);
                 
                 Toast.makeText(this, "successful", Toast.LENGTH_SHORT).show();
             } else if (firstPass.getText().toString().isEmpty())
