@@ -14,7 +14,7 @@ import java.util.List;
 public class MeetingAdapter extends RecyclerView.Adapter<MeetingAdapter.ViewHolder> {
 
     private final Meeting[] requests;
-    private boolean isSelectMeeting;
+    private final boolean isSelectMeeting;
 
     public MeetingAdapter(List<Meeting> requests, boolean isSelectMeeting) {
         this.requests = requests.toArray(new Meeting[0]);
@@ -48,8 +48,8 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingAdapter.ViewHold
         type.setText(requests[position].getType());
 
         TextView description = cardView.findViewById(R.id.des);
-        String s = "On: " + requests[position].getDate() + ", " + requests[position].getFromTime()
-                + ". " + requests[position].getDes();
+        String s = "On: " + requests[position].getFromTime()
+                + ", " + requests[position].getDes();
         description.setText(s);
 
 

@@ -56,7 +56,6 @@ public class MyMeetingsActivity extends AppCompatActivity {
         meeting = all.get(index);
         delete.setEnabled(true);
         fireStore.collection("meetings").whereEqualTo("studentId", meeting.getStudentId())
-                .whereEqualTo("date", meeting.getDate())
                 .whereEqualTo("fromTime", meeting.getFromTime())
                 .get()
                 .addOnCompleteListener(task -> {

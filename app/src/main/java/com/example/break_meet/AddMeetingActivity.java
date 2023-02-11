@@ -3,6 +3,7 @@ package com.example.break_meet;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -14,22 +15,22 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 public class AddMeetingActivity extends AppCompatActivity {
     private Spinner place;
     private EditText time;
     private TextView date;
     private EditText description;
-    private HashMap<String, Meeting> map = new HashMap<>();
 
-    private FirebaseFirestore fireStore = FirebaseFirestore.getInstance();
+    private final FirebaseFirestore fireStore = FirebaseFirestore.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,34 +43,40 @@ public class AddMeetingActivity extends AppCompatActivity {
         description = findViewById(R.id.description);
 
         fireStore.collection("places")
-                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        List<Place> all = task.getResult().toObjects(Place.class);
+                .get().addOnCompleteListener(task -> {
+                    List<Place> all = task.getResult().toObjects(Place.class);
 
-                        ArrayAdapter<Place> adapter = new ArrayAdapter<>(AddMeetingActivity.this, android.R.layout.simple_spinner_item, all);
+                    ArrayAdapter<Place> adapter = new ArrayAdapter<>(AddMeetingActivity.this, android.R.layout.simple_spinner_item, all);
 
-                        place.setAdapter(adapter);
-                    }
-
+                    place.setAdapter(adapter);
                 });
 
     }
 
+    @SuppressLint("SimpleDateFormat")
     public void add(View view) {
-        map.clear();
 
-        fireStore.collection("meetings")
-                .add(new Meeting(
-                        ((Place) place.getSelectedItem()).getType()
-                        , ((Place) place.getSelectedItem()).getName()
-                        , time.getText().toString(), date.getText().toString()
-                        , description.getText().toString(), MainActivity.logInID + ""))
-                .addOnSuccessListener(documentReference -> {
-                    Toast.makeText(this, "Added!", Toast.LENGTH_SHORT).show();
-                }).addOnFailureListener(e -> {
-                    Toast.makeText(this, "Can't add", Toast.LENGTH_SHORT).show();
-                });
+        String[] tokens = time.getText().toString().split(":");
+        if (tokens.length != 2) {
+            Toast.makeText(this, "time must be as HH:MM", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        try {
+            Date date = Objects.requireNonNull(new SimpleDateFormat("dd/MM/yyyy").parse(this.date.getText().toString()));
+            date.setHours(Integer.parseInt(tokens[0]));
+            date.setMinutes(Integer.parseInt(tokens[1]));
+
+            fireStore.collection("meetings")
+                    .add(new Meeting(
+                            ((Place) place.getSelectedItem()).getType()
+                            , ((Place) place.getSelectedItem()).getName()
+                            , new Timestamp(date), description.getText().toString()
+                            , MainActivity.logInID + ""))
+                    .addOnSuccessListener(documentReference -> Toast.makeText(this, "Added!", Toast.LENGTH_SHORT).show())
+                    .addOnFailureListener(e -> Toast.makeText(this, "Can't add", Toast.LENGTH_SHORT).show());
+        } catch (ParseException ignored) {
+
+        }
 
     }
 
