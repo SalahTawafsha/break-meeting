@@ -22,13 +22,12 @@ public class SignUpActivity extends AppCompatActivity {
     private EditText name;
     private EditText id;
     private RadioGroup gender;
-    RadioButton male;
-    RadioButton female;
+    private RadioButton male;
+    private RadioButton female;
     private EditText firstPass;
     private EditText secondPass;
-    Student s;
+    private Student s;
     private final FirebaseFirestore fireStore = FirebaseFirestore.getInstance();
-    private final HashMap<String, Student> map = new HashMap<>();
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -49,30 +48,27 @@ public class SignUpActivity extends AppCompatActivity {
         if (getIntent().getStringExtra("type").equals("update")) {
             add.setText(R.string.update);
             id.setText(MainActivity.logInID);
-            fireStore.collection("break_meet").document(MainActivity.logInID)
-                    .get().addOnSuccessListener(e -> {
-
-                        HashMap<String, String> s = (HashMap<String, String>) e.get(MainActivity.logInID);
-
-                        fillData(s);
+            fireStore.collection("students").whereEqualTo("id_student",MainActivity.logInID)
+                    .get().addOnCompleteListener(task->{
+                       s = task.getResult().toObjects(Student.class).get(0);
+                       fillData();
                     });
         }
 
     }
 
-    private void fillData(HashMap<String, String> map) {
+    private void fillData() {
 
-        name.setText(map.get("name"));
-        if ("M".equals(map.get("gender")))
+        name.setText(s.getName());
+        if ("M".equals(s.getGender()))
             male.setChecked(true);
         else
             female.setChecked(true);
-        date.setText(map.get("date"));
+        date.setText(s.getDate());
 
         firstPass.setHint("Old Password");
         secondPass.setHint("New Password");
 
-        s = new Student(map.get("id_student"), map.get("password"), map.get("name"), map.get("gender"), map.get("date"));
     }
 
     @Override
@@ -95,30 +91,26 @@ public class SignUpActivity extends AppCompatActivity {
         if (getIntent().getStringExtra("type").equals("update")) {
             if (firstPass.getText().toString().equals(s.getPassword())) {
                 s = new Student(id.getText().toString(),
-                        (!secondPass.getText().toString().isEmpty()) ? secondPass.getText().toString() : s.getPassword(), name.getText().toString(),
+                        (!secondPass.getText().toString().isEmpty()) ? secondPass.getText().toString()
+                                : s.getPassword(), name.getText().toString(),
                         (gender.getCheckedRadioButtonId() == R.id.male) ? "M" : "F", date.getText().toString());
-                fireStore.collection("break_meet").document(MainActivity.logInID)
+
+                fireStore.collection("students").document(MainActivity.logInID)
                         .update(id.getText().toString(), s);
+                
                 Toast.makeText(this, "successful", Toast.LENGTH_SHORT).show();
-            }else if(firstPass.getText().toString().isEmpty())
+            } else if (firstPass.getText().toString().isEmpty())
                 Toast.makeText(this, "Enter Old password to save", Toast.LENGTH_SHORT).show();
             else
                 Toast.makeText(this, "Uncorrected Password", Toast.LENGTH_SHORT).show();
 
         } else {
 
-
-            map.clear();
-
-            if (firstPass.getText().toString().equals(secondPass.getText().toString())) {
-                map.put(id.getText().toString(), new Student(id.getText().toString(), firstPass.getText().toString(), name.getText().toString(),
-                        (gender.getCheckedRadioButtonId() == R.id.male) ? "M" : "F", date.getText().toString()));
-
-
-                fireStore.collection("break_meet").document(id.getText().toString()).set(map)
-                        .addOnSuccessListener(e -> Toast.makeText(this, "successful", Toast.LENGTH_SHORT).show())
-                        .addOnFailureListener(e -> Toast.makeText(this, "failed", Toast.LENGTH_SHORT).show());
-            }
+            fireStore.collection("students").add(new Student(id.getText().toString(), firstPass.getText().toString(), name.getText().toString(),
+                            (gender.getCheckedRadioButtonId() == R.id.male) ? "M" : "F", date.getText().toString()))
+                    .addOnSuccessListener(e -> Toast.makeText(this, "successful", Toast.LENGTH_SHORT).show())
+                    .addOnFailureListener(e -> Toast.makeText(this, "failed", Toast.LENGTH_SHORT).show());
         }
     }
+
 }
