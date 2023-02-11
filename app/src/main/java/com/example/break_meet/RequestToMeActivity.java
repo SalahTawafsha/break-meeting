@@ -3,9 +3,12 @@ package com.example.break_meet;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -20,7 +23,7 @@ public class RequestToMeActivity extends AppCompatActivity {
     private static Button reject;
     private static int selectedIndex;
     private final ArrayList<Meeting> values = new ArrayList<>();
-    static final ArrayList<String> keys = new ArrayList<>();
+    private static final ArrayList<String> keys = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +43,7 @@ public class RequestToMeActivity extends AppCompatActivity {
     }
 
     private void fill() {
-        values.clear();
-        keys.clear();
+
         fireStore.collection("request").whereEqualTo("toStudent", MainActivity.logInID)
                 .get().addOnCompleteListener(task -> {
 
@@ -50,6 +52,7 @@ public class RequestToMeActivity extends AppCompatActivity {
                         fireStore.collection("meetings").document(document.get("meetingID").toString()).get()
                                 .addOnSuccessListener(e -> {
                                     Meeting m = e.toObject(Meeting.class);
+                                    Log.e("keys", s + "$" + document.get("fromStudent").toString() + "$" + e.getId());
                                     keys.add(s + "$" + document.get("fromStudent").toString() + "$" + e.getId());
 
                                     m.setStudentId(document.get("fromStudent").toString());
@@ -66,6 +69,7 @@ public class RequestToMeActivity extends AppCompatActivity {
     public void reject(View view) {
         String[] tokens = meetingID.split("[$]");
         fireStore.collection("request").document(tokens[0]).delete();
+        Toast.makeText(this, "Rejected", Toast.LENGTH_SHORT).show();
         values.remove(selectedIndex);
         RequestAdapter adapter = new RequestAdapter(values);
         list.setAdapter(adapter);
@@ -73,7 +77,7 @@ public class RequestToMeActivity extends AppCompatActivity {
 
     public void approval(View view) {
         String[] tokens = meetingID.split("[$]");
-        fireStore.collection("meetings").document(tokens[0])
+        fireStore.collection("meetings").document(tokens[2])
                 .update("secondStudentId", tokens[1]);
 
         fireStore.collection("request").whereEqualTo("meetingID", tokens[2])
@@ -82,9 +86,15 @@ public class RequestToMeActivity extends AppCompatActivity {
                     for (DocumentSnapshot document : task.getResult().getDocuments()) {
                         fireStore.collection("request").document(document.getId()).delete();
                     }
-                    fill();
-                });
 
+                    values.clear();
+                    keys.clear();
+                    RequestAdapter adapter = new RequestAdapter(values);
+                    list.setAdapter(adapter);
+                    fill();
+
+                    Toast.makeText(this, "Approved", Toast.LENGTH_SHORT).show();
+                });
     }
 
     public static void setMeetingID(String meetingID) {
@@ -101,5 +111,9 @@ public class RequestToMeActivity extends AppCompatActivity {
 
     public static void setSelectedIndex(int selectedIndex) {
         RequestToMeActivity.selectedIndex = selectedIndex;
+    }
+
+    public static ArrayList<String> getKeys() {
+        return keys;
     }
 }

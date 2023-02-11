@@ -46,7 +46,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHold
 
 
         cardView.setOnClickListener(v -> {
-            RequestToMeActivity.setMeetingID(RequestToMeActivity.keys.get(position));
+            RequestToMeActivity.setMeetingID(RequestToMeActivity.getKeys().get(position));
             RequestToMeActivity.setSelectedIndex(holder.getAdapterPosition());
             RequestToMeActivity.getApproval().setEnabled(true);
             RequestToMeActivity.getReject().setEnabled(true);
