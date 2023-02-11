@@ -1,24 +1,25 @@
 package com.example.break_meet;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
-    FirebaseFirestore fireStore = FirebaseFirestore.getInstance();
-    EditText id;
-    EditText password;
+    private final FirebaseFirestore fireStore = FirebaseFirestore.getInstance();
+    private EditText id;
+    private EditText password;
 
     static String logInID;
-
-    Map<String, String> map = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,11 +39,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void logIn(View view) {
-        fireStore.collection("break_meet").document(id.getText().toString())
-                .get().addOnSuccessListener(e -> {
-                    if (e.get(id.getText().toString()) != null) {
-                        String studentPass = getStudent(e.get(id.getText().toString()).toString());
-                        if (studentPass.equals(password.getText().toString())) {
+        fireStore.collection("students").whereEqualTo("id_student", id.getText().toString())
+                .get().addOnCompleteListener(task -> {
+                    List<Student> list = task.getResult().toObjects(Student.class);
+
+                    if (list.size() > 0) {
+                        Student s = list.get(0);
+                        if (s.getPassword().equals(password.getText().toString())) {
                             Intent intent = new Intent(this, HomeActivity.class);
                             logInID = id.getText().toString();
                             startActivity(intent);
@@ -52,10 +55,5 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(this, "ID NOT exist!", Toast.LENGTH_SHORT).show();
 
                 });
-    }
-
-    private String getStudent(String str) {
-        String[] tokens = str.split("[=,]");
-        return tokens[5];
     }
 }
