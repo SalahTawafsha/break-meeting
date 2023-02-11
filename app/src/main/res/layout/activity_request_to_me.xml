@@ -28,7 +28,7 @@
 
 
         <ListView
-            android:id="@+id/myMeetingList"
+            android:id="@+id/requests"
             android:layout_width="match_parent"
             android:layout_height="345dp"
             android:background="@color/edit_text_background" />
