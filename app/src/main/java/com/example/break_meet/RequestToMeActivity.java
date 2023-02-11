@@ -92,7 +92,6 @@ public class RequestToMeActivity extends AppCompatActivity {
                     RequestAdapter adapter = new RequestAdapter(values);
                     list.setAdapter(adapter);
                     fill();
-
                     Toast.makeText(this, "Approved", Toast.LENGTH_SHORT).show();
                 });
     }
