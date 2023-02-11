@@ -1,23 +1,16 @@
 package com.example.break_meet;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.List;
 
@@ -56,7 +49,7 @@ public class MyMeetingsActivity extends AppCompatActivity {
         meeting = all.get(index);
         delete.setEnabled(true);
         fireStore.collection("meetings").whereEqualTo("studentId", meeting.getStudentId())
-                .whereEqualTo("fromTime", meeting.getFromTime())
+                .whereEqualTo("fromTime", meeting.getStringDate())
                 .get()
                 .addOnCompleteListener(task -> {
 

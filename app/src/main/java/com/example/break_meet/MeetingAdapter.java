@@ -48,7 +48,7 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingAdapter.ViewHold
         type.setText(requests[position].getType());
 
         TextView description = cardView.findViewById(R.id.des);
-        String s = "On: " + requests[position].getFromTime()
+        String s = "On: " + requests[position].getStringDate()
                 + ", " + requests[position].getDes();
         description.setText(s);
 

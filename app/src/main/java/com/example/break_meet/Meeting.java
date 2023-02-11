@@ -62,10 +62,14 @@ public class Meeting {
         this.placeName = placeName;
     }
 
-    public String getFromTime() {
+    public String getStringDate() {
         Date date = new Date(fromTime.getSeconds() * 1000 + fromTime.getNanoseconds());
 
         return new SimpleDateFormat("dd-MM-yyyy").format(date) +" at "+ new SimpleDateFormat("HH:MM").format(date);
+    }
+
+    public Timestamp getFromTime() {
+        return fromTime;
     }
 
     public void setFromTime(Timestamp fromTime) {

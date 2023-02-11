@@ -8,7 +8,6 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHolder> {
@@ -43,7 +42,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHold
 //        date.setText(requests[position].getDate());
 
         TextView time = cardView.findViewById(R.id.requestTime);
-        time.setText(requests[position].getFromTime().toString());
+        time.setText(requests[position].getStringDate().toString());
 
 
         cardView.setOnClickListener(v -> {

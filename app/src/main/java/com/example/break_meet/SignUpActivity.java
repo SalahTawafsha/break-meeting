@@ -70,7 +70,7 @@ public class SignUpActivity extends AppCompatActivity {
             male.setChecked(true);
         else
             female.setChecked(true);
-        date.setText(s.getDate());
+        date.setText(s.getStringDate());
 
         firstPass.setHint("Old Password");
         secondPass.setHint("New Password");
@@ -117,12 +117,16 @@ public class SignUpActivity extends AppCompatActivity {
 
         } else {
             try {
-            Date date  = Objects.requireNonNull(new SimpleDateFormat("dd/MM/yyyy").parse(this.date.getText().toString()));
-
-            fireStore.collection("students").add(new Student(id.getText().toString(), firstPass.getText().toString(), name.getText().toString(),
-                            (gender.getCheckedRadioButtonId() == R.id.male) ? "M" : "F", new Timestamp(date)))
-                    .addOnSuccessListener(e -> Toast.makeText(this, "successful", Toast.LENGTH_SHORT).show())
-                    .addOnFailureListener(e -> Toast.makeText(this, "failed", Toast.LENGTH_SHORT).show());
+                Date date = Objects.requireNonNull(new SimpleDateFormat("dd/MM/yyyy").parse(this.date.getText().toString()));
+                if (firstPass.getText().toString().equals(secondPass.getText().toString())) {
+                    fireStore.collection("students").add(new Student(id.getText().toString(), firstPass.getText().toString(), name.getText().toString(),
+                                    (gender.getCheckedRadioButtonId() == R.id.male) ? "M" : "F", new Timestamp(date)))
+                            .addOnSuccessListener(e -> Toast.makeText(this, "successful", Toast.LENGTH_SHORT).show())
+                            .addOnFailureListener(e -> Toast.makeText(this, "failed", Toast.LENGTH_SHORT).show());
+                    finish();
+                }
+                else
+                    Toast.makeText(this, "Passwords doesn't match!", Toast.LENGTH_SHORT).show();
             } catch (ParseException ignored) {
             }
         }

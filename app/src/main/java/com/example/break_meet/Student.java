@@ -67,10 +67,14 @@ public class Student {
     }
 
 
-    public String getDate() {
+    public String getStringDate() {
         Date date = new Date(this.date.getSeconds() * 1000 + this.date.getNanoseconds());
 
         return new SimpleDateFormat("dd-MM-yyyy").format(date) +" at "+ new SimpleDateFormat("HH:MM").format(date);
+    }
+
+    public Timestamp getDate() {
+        return date;
     }
 
     public void setDate(Timestamp date) {
