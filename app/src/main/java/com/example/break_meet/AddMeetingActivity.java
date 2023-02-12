@@ -72,7 +72,7 @@ public class AddMeetingActivity extends AppCompatActivity {
                         .addOnSuccessListener(documentReference -> Toast.makeText(this, "Added!", Toast.LENGTH_SHORT).show())
                         .addOnFailureListener(e -> Toast.makeText(this, "Can't add", Toast.LENGTH_SHORT).show());
             } catch (ParseException e) {
-                Toast.makeText(this, "You Must Fill All data !", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "You Must fill All data !", Toast.LENGTH_SHORT).show();
             } catch (NumberFormatException e) {
                 Toast.makeText(this, "time must be integers as HH:MM!", Toast.LENGTH_SHORT).show();
             }

@@ -119,7 +119,7 @@ public class SignUpActivity extends AppCompatActivity {
                 } catch (ParseException ignored) {
                 }
             } else if (firstPass.getText().toString().isEmpty())
-                Toast.makeText(this, "Enter Old password to save", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Enter old password to update", Toast.LENGTH_SHORT).show();
             else
                 Toast.makeText(this, "Uncorrected Password", Toast.LENGTH_SHORT).show();
         } else

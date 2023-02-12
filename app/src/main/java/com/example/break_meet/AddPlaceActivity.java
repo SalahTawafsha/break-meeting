@@ -32,6 +32,6 @@ public class AddPlaceActivity extends AppCompatActivity {
                     .addOnSuccessListener(e -> Toast.makeText(this, "Successful!", Toast.LENGTH_SHORT).show())
                     .addOnFailureListener(e -> Toast.makeText(this, "Place ID is already exist!", Toast.LENGTH_SHORT).show());
         else
-            Toast.makeText(this, "You Must Fill All data !", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "You Must fill All data !", Toast.LENGTH_SHORT).show();
     }
 }

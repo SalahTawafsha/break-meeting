@@ -11,7 +11,6 @@ import android.widget.Button;
 
 public class HomeActivity extends AppCompatActivity {
 
-    private SharedPreferences sharedPref;
     private SharedPreferences.Editor editor;
 
     @Override
@@ -19,7 +18,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        sharedPref = getSharedPreferences(
+        SharedPreferences sharedPref = getSharedPreferences(
                 getString(R.string.login)
                 , Context.MODE_PRIVATE);
 
