@@ -101,11 +101,12 @@ public class SignUpActivity extends AppCompatActivity {
             add();
     }
 
+    @SuppressLint("SimpleDateFormat")
     private void update() {
         if (!name.getText().toString().trim().isEmpty()) {
             if (firstPass.getText().toString().equals(s.getPassword())) {
                 try {
-                    Date date = Objects.requireNonNull(new SimpleDateFormat("dd/MM/yyyy").parse(this.date.getText().toString()));
+                     Date date = Objects.requireNonNull(new SimpleDateFormat("dd/MM/yyyy").parse(this.date.getText().toString()));
 
                     s = new Student(id.getText().toString(),
                             (!secondPass.getText().toString().isEmpty()) ? secondPass.getText().toString()
@@ -125,6 +126,7 @@ public class SignUpActivity extends AppCompatActivity {
             Toast.makeText(this, "Name can't be empty!", Toast.LENGTH_SHORT).show();
     }
 
+    @SuppressLint("SimpleDateFormat")
     private void add() {
 
         fireStore.collection("students").whereEqualTo("id_student", id.getText().toString())
