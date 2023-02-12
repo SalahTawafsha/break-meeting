@@ -38,11 +38,8 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHold
         TextView placeName = cardView.findViewById(R.id.place);
         placeName.setText(requests[position].getPlaceName());
 
-//        TextView date = cardView.findViewById(R.id.requestDate);
-//        date.setText(requests[position].getDate());
-
         TextView time = cardView.findViewById(R.id.requestTime);
-        time.setText(requests[position].getStringDate().toString());
+        time.setText(requests[position].getStringDate());
 
 
         cardView.setOnClickListener(v -> {

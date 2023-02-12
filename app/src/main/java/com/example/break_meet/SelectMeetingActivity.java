@@ -3,13 +3,9 @@ package com.example.break_meet;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -22,10 +18,8 @@ public class SelectMeetingActivity extends AppCompatActivity {
     private RecyclerView list;
     private final FirebaseFirestore fireStore = FirebaseFirestore.getInstance();
     private List<Meeting> all;
-    private String meetingID;
-    private Meeting meet;
     private static Button select;
-    private List<String> keys = new ArrayList<>();
+    private final List<String> keys = new ArrayList<>();
     private static int index;
 
     @Override
@@ -42,11 +36,8 @@ public class SelectMeetingActivity extends AppCompatActivity {
                 .get().addOnCompleteListener(task -> {
                     all = task.getResult().toObjects(Meeting.class);
 
-                    for (DocumentSnapshot document : task.getResult().getDocuments()) {
+                    for (DocumentSnapshot document : task.getResult().getDocuments())
                         keys.add(document.getId());
-                    }
-
-                    Log.e("TEESSSTT", keys.toString());
 
 
                     list.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
@@ -56,17 +47,11 @@ public class SelectMeetingActivity extends AppCompatActivity {
 
                 });
 
-//        list.setOnItemClickListener((adapterView, view, i, l) -> {
-//            meetingID = keys.get(i);
-//            meet = all.get(i);
-//            Log.e("TEESSSTT", meetingID);
-//            select.setEnabled(true);
-//        });
     }
 
     public void selectMeeting(View view) {
-        meetingID = keys.get(index);
-        meet = all.get(index);
+        String meetingID = keys.get(index);
+        Meeting meet = all.get(index);
         fireStore.collection("request").add(new Request(MainActivity.logInID, meet.getStudentId(), meetingID))
                 .addOnSuccessListener(runnable -> Toast.makeText(this, "Sent!", Toast.LENGTH_SHORT).show())
                 .addOnFailureListener(runnable -> Toast.makeText(this, "Failed!", Toast.LENGTH_SHORT).show());

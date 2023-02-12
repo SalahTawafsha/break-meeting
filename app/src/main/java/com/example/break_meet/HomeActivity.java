@@ -6,22 +6,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.LinearLayout;
 
 public class HomeActivity extends AppCompatActivity {
-    private LinearLayout linearLayout;
-    private Button addPlace;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        linearLayout = findViewById(R.id.linearLayout);
-
         if ("1200339".equals(MainActivity.logInID)) {
-            addPlace = findViewById(R.id.addPlace);
+            Button addPlace = findViewById(R.id.addPlace);
             addPlace.setVisibility(View.VISIBLE);
         }
     }

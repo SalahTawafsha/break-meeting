@@ -7,10 +7,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
-
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.HashMap;
 
 public class AddPlaceActivity extends AppCompatActivity {
     private EditText placeName;

@@ -5,7 +5,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -52,7 +51,6 @@ public class RequestToMeActivity extends AppCompatActivity {
                         fireStore.collection("meetings").document(document.get("meetingID").toString()).get()
                                 .addOnSuccessListener(e -> {
                                     Meeting m = e.toObject(Meeting.class);
-                                    Log.e("keys", s + "$" + document.get("fromStudent").toString() + "$" + e.getId());
                                     keys.add(s + "$" + document.get("fromStudent").toString() + "$" + e.getId());
 
                                     m.setStudentId(document.get("fromStudent").toString());
