@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
 import com.google.firebase.firestore.FirebaseFirestore;
 
 
@@ -26,9 +27,11 @@ public class AddPlaceActivity extends AppCompatActivity {
     }
 
     public void add(View view) {
-
-        fireStore.collection("places").add(new Place(placeName.getText().toString(), type.getSelectedItem().toString()))
-                .addOnSuccessListener(e -> Toast.makeText(this, "Successful!", Toast.LENGTH_SHORT).show())
-                .addOnFailureListener(e -> Toast.makeText(this, "Place ID is already exist!", Toast.LENGTH_SHORT).show());
+        if (!type.getSelectedItem().toString().equals("Select Type") && !placeName.getText().toString().trim().isEmpty())
+            fireStore.collection("places").add(new Place(placeName.getText().toString(), type.getSelectedItem().toString()))
+                    .addOnSuccessListener(e -> Toast.makeText(this, "Successful!", Toast.LENGTH_SHORT).show())
+                    .addOnFailureListener(e -> Toast.makeText(this, "Place ID is already exist!", Toast.LENGTH_SHORT).show());
+        else
+            Toast.makeText(this, "You Must Fill All data !", Toast.LENGTH_SHORT).show();
     }
 }
