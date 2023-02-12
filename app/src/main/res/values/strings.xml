@@ -34,6 +34,8 @@
     <string name="reject">Reject</string>
     <string name="approval">approval</string>
     <string name="login"> </string>
+    <string name="delete_request">delete request</string>
+    <string name="approval_requests">Approval requests</string>
 
     <array name="types">
         <item>Select Type</item>

@@ -18,7 +18,6 @@ public class MainActivity extends AppCompatActivity {
     private final FirebaseFirestore fireStore = FirebaseFirestore.getInstance();
     private EditText id;
     private EditText password;
-    private SharedPreferences sharedPref;
     private SharedPreferences.Editor editor;
 
     static String logInID;
@@ -31,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         id = findViewById(R.id.editTextTextPersonName);
         password = findViewById(R.id.editTextTextPassword);
 
-         sharedPref = getSharedPreferences(
+        SharedPreferences sharedPref = getSharedPreferences(
                 getString(R.string.login)
                 , Context.MODE_PRIVATE);
 
@@ -40,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
         if(!sharedPref.getString("logInID","").equals("")){
             Intent intent = new Intent(this, HomeActivity.class);
-            logInID = id.getText().toString();
+            logInID = sharedPref.getString("logInID","");
             startActivity(intent);
         }
 

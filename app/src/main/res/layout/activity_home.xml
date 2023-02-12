@@ -46,6 +46,12 @@
             android:text="@string/requests_to_me" />
 
         <Button
+            android:id="@+id/button4"
+            style="@style/myButton"
+            android:onClick="approvalRequests"
+            android:text="@string/approval_requests" />
+
+        <Button
             android:onClick="myMeetings"
             style="@style/myButton"
             android:text="@string/my_meetings" />

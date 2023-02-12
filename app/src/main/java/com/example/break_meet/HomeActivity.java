@@ -67,4 +67,9 @@ public class HomeActivity extends AppCompatActivity {
         Intent intent = new Intent(this, RequestToMeActivity.class);
         startActivity(intent);
     }
+
+    public void approvalRequests(View view) {
+        Intent intent = new Intent(this, RequestFromMeActivity.class);
+        startActivity(intent);
+    }
 }
