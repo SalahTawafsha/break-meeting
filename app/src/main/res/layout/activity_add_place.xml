@@ -22,6 +22,11 @@
         app:layout_constraintVertical_bias="0.5">
 
 
+        <TextView
+            android:id="@+id/textView5"
+            style="@style/label"
+            android:text="@string/add_place" />
+
         <Spinner
             android:id="@+id/typeOfPlace"
             android:entries="@array/types"

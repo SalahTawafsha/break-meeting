@@ -21,7 +21,14 @@ public class Calender extends AppCompatActivity {
     }
 
     public void selectDate(View view) {
-        String date = calendarView.getDayOfMonth() + "/" + (calendarView.getMonth()+1) + "/" + calendarView.getYear();
+        String day = calendarView.getDayOfMonth() + "";
+        String month = calendarView.getMonth() + 1 + "";
+        if (calendarView.getDayOfMonth() < 10)
+            day = "0" + day;
+        if (calendarView.getMonth() + 1 < 10)
+            month = "0" + month;
+
+        String date = day + "-" + month + "-" + calendarView.getYear();
         Intent intent = new Intent();
         intent.putExtra("date", date);
         setResult(Activity.RESULT_OK, intent);

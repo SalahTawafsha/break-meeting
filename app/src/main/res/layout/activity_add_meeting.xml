@@ -24,7 +24,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            style="@style/TextView"
+            style="@style/label"
             android:text="@string/add_meeting"/>
 
         <Spinner

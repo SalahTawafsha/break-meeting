@@ -57,6 +57,7 @@ public class SignUpActivity extends AppCompatActivity {
                     .get().addOnCompleteListener(task -> {
                         s = task.getResult().toObjects(Student.class).get(0);
                         ID = task.getResult().getDocuments().get(0).getId();
+                        id.setEnabled(false);
                         fillData();
                     });
         }
@@ -70,7 +71,7 @@ public class SignUpActivity extends AppCompatActivity {
             male.setChecked(true);
         else
             female.setChecked(true);
-        date.setText(s.getStringDate());
+        date.setText(s.getIsoDate());
 
         firstPass.setHint("Old Password");
         secondPass.setHint("New Password");
@@ -94,7 +95,14 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     public void add(View view) {
-        if (getIntent().getStringExtra("type").equals("update")) {
+        if (getIntent().getStringExtra("type").equals("update"))
+           update();
+        else
+            add();
+    }
+
+    private void update() {
+        if (!name.getText().toString().trim().isEmpty()) {
             if (firstPass.getText().toString().equals(s.getPassword())) {
                 try {
                     Date date = Objects.requireNonNull(new SimpleDateFormat("dd/MM/yyyy").parse(this.date.getText().toString()));
@@ -104,8 +112,7 @@ public class SignUpActivity extends AppCompatActivity {
                                     : s.getPassword(), name.getText().toString(),
                             (gender.getCheckedRadioButtonId() == R.id.male) ? "M" : "F", new Timestamp(date));
 
-                    fireStore.collection("students").document(ID)
-                            .set(s);
+                    fireStore.collection("students").document(ID).set(s);
 
                     Toast.makeText(this, "successful", Toast.LENGTH_SHORT).show();
                 } catch (ParseException ignored) {
@@ -114,22 +121,44 @@ public class SignUpActivity extends AppCompatActivity {
                 Toast.makeText(this, "Enter Old password to save", Toast.LENGTH_SHORT).show();
             else
                 Toast.makeText(this, "Uncorrected Password", Toast.LENGTH_SHORT).show();
+        } else
+            Toast.makeText(this, "Name can't be empty!", Toast.LENGTH_SHORT).show();
+    }
 
-        } else {
-            try {
-                Date date = Objects.requireNonNull(new SimpleDateFormat("dd/MM/yyyy").parse(this.date.getText().toString()));
-                if (firstPass.getText().toString().equals(secondPass.getText().toString())) {
-                    fireStore.collection("students").add(new Student(id.getText().toString(), firstPass.getText().toString(), name.getText().toString(),
-                                    (gender.getCheckedRadioButtonId() == R.id.male) ? "M" : "F", new Timestamp(date)))
-                            .addOnSuccessListener(e -> Toast.makeText(this, "successful", Toast.LENGTH_SHORT).show())
-                            .addOnFailureListener(e -> Toast.makeText(this, "failed", Toast.LENGTH_SHORT).show());
-                    finish();
-                }
-                else
-                    Toast.makeText(this, "Passwords doesn't match!", Toast.LENGTH_SHORT).show();
-            } catch (ParseException ignored) {
-            }
-        }
+    private void add() {
+
+        fireStore.collection("students").whereEqualTo("id_student", id.getText().toString())
+                .get().addOnCompleteListener(task -> {
+                    if (task.getResult().getDocuments().size() > 0) {
+                        id.setText("");
+                        Toast.makeText(SignUpActivity.this, "ID already exist !", Toast.LENGTH_SHORT).show();
+                    } else {
+                        if (validateAll()) {
+                            try {
+                                Date date = Objects.requireNonNull(new SimpleDateFormat("dd-MM-yyyy").parse(this.date.getText().toString()));
+                                if (firstPass.getText().toString().equals(secondPass.getText().toString())) {
+                                    fireStore.collection("students").add(new Student(id.getText().toString(), firstPass.getText().toString(), name.getText().toString(),
+                                                    (gender.getCheckedRadioButtonId() == R.id.male) ? "M" : "F", new Timestamp(date)))
+                                            .addOnSuccessListener(e -> Toast.makeText(this, "successful", Toast.LENGTH_SHORT).show())
+                                            .addOnFailureListener(e -> Toast.makeText(this, "failed", Toast.LENGTH_SHORT).show());
+                                    finish();
+                                } else
+                                    Toast.makeText(this, "Passwords doesn't match!", Toast.LENGTH_SHORT).show();
+                            } catch (ParseException e) {
+                                Toast.makeText(this, "You must fill all field!", Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            Toast.makeText(this, "You must fill all field!", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+    }
+
+    private boolean validateAll() {
+        return !id.getText().toString().trim().isEmpty() && !name.getText().toString().trim().isEmpty() &&
+                !date.getText().toString().trim().isEmpty() && !firstPass.getText().toString().trim().isEmpty()
+                && !secondPass.getText().toString().trim().isEmpty() && (male.isChecked() || female.isChecked());
     }
 
 }

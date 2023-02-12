@@ -23,7 +23,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            style="@style/EditText"
+            style="@style/label"
             android:text="@string/all_meetings"/>
 
 

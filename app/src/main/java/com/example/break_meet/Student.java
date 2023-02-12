@@ -70,7 +70,13 @@ public class Student {
     public String getStringDate() {
         Date date = new Date(this.date.getSeconds() * 1000 + this.date.getNanoseconds());
 
-        return new SimpleDateFormat("dd-MM-yyyy").format(date) +" at "+ new SimpleDateFormat("HH:MM").format(date);
+        return new SimpleDateFormat("dd-MM-yyyy").format(date) + " at " + new SimpleDateFormat("HH:MM").format(date);
+    }
+
+    public String getIsoDate() {
+        Date date = new Date(this.date.getSeconds() * 1000 + this.date.getNanoseconds());
+
+        return new SimpleDateFormat("dd-MM-yyyy").format(date);
     }
 
     public Timestamp getDate() {
