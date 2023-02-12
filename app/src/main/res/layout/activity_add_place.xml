@@ -25,11 +25,11 @@
         <Spinner
             android:id="@+id/typeOfPlace"
             android:entries="@array/types"
-            style="@style/TextView"/>
+            style="@style/EditText"/>
 
         <EditText
             android:id="@+id/placeName"
-            style="@style/TextView"
+            style="@style/EditText"
             android:ems="10"
             android:hint="@string/place_name"
             android:importantForAutofill="no"
@@ -37,8 +37,7 @@
 
         <Button
             android:id="@+id/button3"
-            android:layout_width="111dp"
-            android:layout_height="69dp"
+            style="@style/myButton"
             android:onClick="add"
             android:text="@string/add"
             android:textColor="#DC628AB5" />

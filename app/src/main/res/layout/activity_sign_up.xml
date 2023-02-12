@@ -99,8 +99,7 @@
 
         <Button
             android:id="@+id/button3"
-            android:layout_width="111dp"
-            android:layout_height="69dp"
+            style="@style/myButton"
             android:onClick="add"
             android:text="@string/sign_up"
             android:textColor="#DC628AB5" />
