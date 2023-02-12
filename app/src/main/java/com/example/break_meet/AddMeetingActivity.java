@@ -1,6 +1,7 @@
 package com.example.break_meet;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,8 +11,10 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -49,29 +52,39 @@ public class AddMeetingActivity extends AppCompatActivity {
 
     @SuppressLint("SimpleDateFormat")
     public void add(View view) {
+        if (validate()) {
+            String[] tokens = time.getText().toString().split(":");
+            if (tokens.length != 2) {
+                Toast.makeText(this, "time must be as HH:MM", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            try {
+                Date date = Objects.requireNonNull(new SimpleDateFormat("dd-MM-yyyy").parse(this.date.getText().toString()));
+                date.setHours(Integer.parseInt(tokens[0]));
+                date.setMinutes(Integer.parseInt(tokens[1]));
 
-        String[] tokens = time.getText().toString().split(":");
-        if (tokens.length != 2) {
-            Toast.makeText(this, "time must be as HH:MM", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        try {
-            Date date = Objects.requireNonNull(new SimpleDateFormat("dd/MM/yyyy").parse(this.date.getText().toString()));
-            date.setHours(Integer.parseInt(tokens[0]));
-            date.setMinutes(Integer.parseInt(tokens[1]));
+                fireStore.collection("meetings")
+                        .add(new Meeting(
+                                ((Place) place.getSelectedItem()).getType()
+                                , ((Place) place.getSelectedItem()).getName()
+                                , new Timestamp(date), description.getText().toString()
+                                , MainActivity.logInID + ""))
+                        .addOnSuccessListener(documentReference -> Toast.makeText(this, "Added!", Toast.LENGTH_SHORT).show())
+                        .addOnFailureListener(e -> Toast.makeText(this, "Can't add", Toast.LENGTH_SHORT).show());
+            } catch (ParseException e) {
+                Toast.makeText(this, "You Must Fill All data !", Toast.LENGTH_SHORT).show();
+            } catch (NumberFormatException e) {
+                Toast.makeText(this, "time must be integers as HH:MM!", Toast.LENGTH_SHORT).show();
+            }
+        } else
+            Toast.makeText(this, "You MUST fill All data !", Toast.LENGTH_SHORT).show();
 
-            fireStore.collection("meetings")
-                    .add(new Meeting(
-                            ((Place) place.getSelectedItem()).getType()
-                            , ((Place) place.getSelectedItem()).getName()
-                            , new Timestamp(date), description.getText().toString()
-                            , MainActivity.logInID + ""))
-                    .addOnSuccessListener(documentReference -> Toast.makeText(this, "Added!", Toast.LENGTH_SHORT).show())
-                    .addOnFailureListener(e -> Toast.makeText(this, "Can't add", Toast.LENGTH_SHORT).show());
-        } catch (ParseException ignored) {
 
-        }
+    }
 
+    private boolean validate() {
+        return !time.getText().toString().trim().isEmpty() && !date.getText().toString().trim().isEmpty()
+                && !description.getText().toString().trim().isEmpty();
     }
 
     @Override
