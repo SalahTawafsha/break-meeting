@@ -33,6 +33,7 @@
     <string name="requests_to_me">Requests To Me</string>
     <string name="reject">Reject</string>
     <string name="approval">approval</string>
+    <string name="login"> </string>
 
     <array name="types">
         <item>Select Type</item>

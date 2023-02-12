@@ -2,18 +2,24 @@ package com.example.break_meet;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private final FirebaseFirestore fireStore = FirebaseFirestore.getInstance();
     private EditText id;
     private EditText password;
+    private SharedPreferences sharedPref;
+    private SharedPreferences.Editor editor;
 
     static String logInID;
 
@@ -24,6 +30,19 @@ public class MainActivity extends AppCompatActivity {
 
         id = findViewById(R.id.editTextTextPersonName);
         password = findViewById(R.id.editTextTextPassword);
+
+         sharedPref = getSharedPreferences(
+                getString(R.string.login)
+                , Context.MODE_PRIVATE);
+
+         editor = sharedPref.edit();
+
+
+        if(!sharedPref.getString("logInID","").equals("")){
+            Intent intent = new Intent(this, HomeActivity.class);
+            logInID = id.getText().toString();
+            startActivity(intent);
+        }
 
     }
 
@@ -44,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
                         if (s.getPassword().equals(password.getText().toString())) {
                             Intent intent = new Intent(this, HomeActivity.class);
                             logInID = id.getText().toString();
+                            editor.putString("logInID", id.getText().toString());
+                            editor.commit();
                             startActivity(intent);
                         } else
                             Toast.makeText(this, "Uncorrected Password!", Toast.LENGTH_SHORT).show();

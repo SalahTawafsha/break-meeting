@@ -2,22 +2,40 @@ package com.example.break_meet;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
 public class HomeActivity extends AppCompatActivity {
 
+    private SharedPreferences sharedPref;
+    private SharedPreferences.Editor editor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        sharedPref = getSharedPreferences(
+                getString(R.string.login)
+                , Context.MODE_PRIVATE);
+
+        editor = sharedPref.edit();
+
         if ("1200339".equals(MainActivity.logInID)) {
             Button addPlace = findViewById(R.id.addPlace);
             addPlace.setVisibility(View.VISIBLE);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        editor.putString("logInID", "");
+        editor.commit();
+        super.onBackPressed();
     }
 
     public void add(View view) {
