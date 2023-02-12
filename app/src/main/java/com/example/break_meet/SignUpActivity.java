@@ -3,7 +3,9 @@ package com.example.break_meet;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -50,10 +52,14 @@ public class SignUpActivity extends AppCompatActivity {
         male = findViewById(R.id.male);
         female = findViewById(R.id.female);
 
+        SharedPreferences sharedPref = getSharedPreferences(
+                getString(R.string.login)
+                , Context.MODE_PRIVATE);
+
         if (getIntent().getStringExtra("type").equals("update")) {
             add.setText(R.string.update);
-            id.setText(MainActivity.logInID);
-            fireStore.collection("students").whereEqualTo("id_student", MainActivity.logInID)
+            id.setText(sharedPref.getString("logInID", ""));
+            fireStore.collection("students").whereEqualTo("id_student", sharedPref.getString("logInID", ""))
                     .get().addOnCompleteListener(task -> {
                         s = task.getResult().toObjects(Student.class).get(0);
                         ID = task.getResult().getDocuments().get(0).getId();

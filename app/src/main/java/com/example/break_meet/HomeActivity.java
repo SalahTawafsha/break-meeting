@@ -24,7 +24,7 @@ public class HomeActivity extends AppCompatActivity {
 
         editor = sharedPref.edit();
 
-        if ("1200339".equals(MainActivity.logInID)) {
+        if ("1200339".equals(sharedPref.getString("logInID",""))) {
             Button addPlace = findViewById(R.id.addPlace);
             addPlace.setVisibility(View.VISIBLE);
         }

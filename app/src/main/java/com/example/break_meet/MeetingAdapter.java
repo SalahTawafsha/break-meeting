@@ -1,5 +1,6 @@
 package com.example.break_meet;
 
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,11 +15,15 @@ import java.util.List;
 public class MeetingAdapter extends RecyclerView.Adapter<MeetingAdapter.ViewHolder> {
 
     private final Meeting[] requests;
-    private final boolean isSelectMeeting;
+    private final byte type;
+    public static final byte SELECT_MEETING = 0;
+    public static final byte MY_MEETING = 1;
+    public static final byte APPROVAL_REQUEST = 2;
 
-    public MeetingAdapter(List<Meeting> requests, boolean isSelectMeeting) {
+
+    public MeetingAdapter(List<Meeting> requests, byte type) {
         this.requests = requests.toArray(new Meeting[0]);
-        this.isSelectMeeting = isSelectMeeting;
+        this.type = type;
     }
 
     @NonNull
@@ -36,10 +41,10 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingAdapter.ViewHold
         CardView cardView = holder.cardView;
 
         TextView studentID = cardView.findViewById(R.id.meetingStudentIdd);
-        if (isSelectMeeting)
-            studentID.setText(requests[position].getStudentId());
-        else
+        if (type == MY_MEETING)
             studentID.setVisibility(View.GONE);
+        else
+            studentID.setText(requests[position].getStudentId());
 
         TextView placeName = cardView.findViewById(R.id.meetingPlace);
         placeName.setText(requests[position].getPlaceName());
@@ -52,16 +57,16 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingAdapter.ViewHold
                 + ", " + requests[position].getDes();
         description.setText(s);
 
-
-        cardView.setOnClickListener(v -> {
-            if (isSelectMeeting) {
-                SelectMeetingActivity.setIndex(holder.getAdapterPosition());
-                SelectMeetingActivity.getSelect().setEnabled(true);
-            } else {
-                MyMeetingsActivity.setIndex(holder.getAdapterPosition());
-                MyMeetingsActivity.getDelete().setEnabled(true);
-            }
-        });
+        if (this.type != APPROVAL_REQUEST)
+            cardView.setOnClickListener(v -> {
+                if (this.type == SELECT_MEETING) {
+                    SelectMeetingActivity.setIndex(holder.getAdapterPosition());
+                    SelectMeetingActivity.getSelect().setEnabled(true);
+                } else {
+                    MyMeetingsActivity.setIndex(holder.getAdapterPosition());
+                    MyMeetingsActivity.getDelete().setEnabled(true);
+                }
+            });
     }
 
     @Override

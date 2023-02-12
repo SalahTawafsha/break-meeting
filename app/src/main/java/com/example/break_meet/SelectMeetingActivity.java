@@ -3,6 +3,9 @@ package com.example.break_meet;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -21,6 +24,7 @@ public class SelectMeetingActivity extends AppCompatActivity {
     private static Button select;
     private final List<String> keys = new ArrayList<>();
     private static int index;
+    private SharedPreferences sharedPref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +35,11 @@ public class SelectMeetingActivity extends AppCompatActivity {
         list = findViewById(R.id.myMeetingList);
         select = findViewById(R.id.select);
 
-        fireStore.collection("meetings").whereNotEqualTo("studentId", MainActivity.logInID)
+        sharedPref = getSharedPreferences(
+                getString(R.string.login)
+                , Context.MODE_PRIVATE);
+
+        fireStore.collection("meetings").whereNotEqualTo("studentId", sharedPref.getString("logInID", ""))
                 .whereEqualTo("secondStudentId", "")
                 .get().addOnCompleteListener(task -> {
                     all = task.getResult().toObjects(Meeting.class);
@@ -41,7 +49,7 @@ public class SelectMeetingActivity extends AppCompatActivity {
 
 
                     list.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-                    MeetingAdapter adapter = new MeetingAdapter(all,true);
+                    MeetingAdapter adapter = new MeetingAdapter(all, MeetingAdapter.SELECT_MEETING);
 
                     list.setAdapter(adapter);
 
@@ -52,8 +60,13 @@ public class SelectMeetingActivity extends AppCompatActivity {
     public void selectMeeting(View view) {
         String meetingID = keys.get(index);
         Meeting meet = all.get(index);
-        fireStore.collection("request").add(new Request(MainActivity.logInID, meet.getStudentId(), meetingID))
-                .addOnSuccessListener(runnable -> Toast.makeText(this, "Sent!", Toast.LENGTH_SHORT).show())
+
+
+        fireStore.collection("request").add(new Request(sharedPref.getString("logInID", ""), meet.getStudentId(), meetingID))
+                .addOnSuccessListener(runnable -> {
+                    Toast.makeText(this, "Sent!", Toast.LENGTH_SHORT).show();
+                    select.setEnabled(false);
+                })
                 .addOnFailureListener(runnable -> Toast.makeText(this, "Failed!", Toast.LENGTH_SHORT).show());
     }
 

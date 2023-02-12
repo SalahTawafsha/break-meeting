@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -43,7 +45,10 @@ public class RequestToMeActivity extends AppCompatActivity {
 
     private void fill() {
 
-        fireStore.collection("request").whereEqualTo("toStudent", MainActivity.logInID)
+        SharedPreferences sharedPref = getSharedPreferences(
+                getString(R.string.login)
+                , Context.MODE_PRIVATE);
+        fireStore.collection("request").whereEqualTo("toStudent", sharedPref.getString("logInID", ""))
                 .get().addOnCompleteListener(task -> {
 
                     for (DocumentSnapshot document : task.getResult().getDocuments()) {
@@ -71,6 +76,7 @@ public class RequestToMeActivity extends AppCompatActivity {
         values.remove(selectedIndex);
         RequestAdapter adapter = new RequestAdapter(values);
         list.setAdapter(adapter);
+        reject.setEnabled(false);
     }
 
     public void approval(View view) {
@@ -90,6 +96,7 @@ public class RequestToMeActivity extends AppCompatActivity {
                     RequestAdapter adapter = new RequestAdapter(values);
                     list.setAdapter(adapter);
                     fill();
+                    approval.setEnabled(false);
                     Toast.makeText(this, "Approved", Toast.LENGTH_SHORT).show();
                 });
     }

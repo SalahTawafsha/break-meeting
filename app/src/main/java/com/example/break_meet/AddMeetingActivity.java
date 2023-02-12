@@ -3,7 +3,9 @@ package com.example.break_meet;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -62,13 +64,16 @@ public class AddMeetingActivity extends AppCompatActivity {
                 Date date = Objects.requireNonNull(new SimpleDateFormat("dd-MM-yyyy").parse(this.date.getText().toString()));
                 date.setHours(Integer.parseInt(tokens[0]));
                 date.setMinutes(Integer.parseInt(tokens[1]));
+                SharedPreferences sharedPref = getSharedPreferences(
+                        getString(R.string.login)
+                        , Context.MODE_PRIVATE);
 
                 fireStore.collection("meetings")
                         .add(new Meeting(
                                 ((Place) place.getSelectedItem()).getType()
                                 , ((Place) place.getSelectedItem()).getName()
                                 , new Timestamp(date), description.getText().toString()
-                                , MainActivity.logInID + ""))
+                                , sharedPref.getString("logInID","") + ""))
                         .addOnSuccessListener(documentReference -> Toast.makeText(this, "Added!", Toast.LENGTH_SHORT).show())
                         .addOnFailureListener(e -> Toast.makeText(this, "Can't add", Toast.LENGTH_SHORT).show());
             } catch (ParseException e) {

@@ -20,8 +20,6 @@ public class MainActivity extends AppCompatActivity {
     private EditText password;
     private SharedPreferences.Editor editor;
 
-    static String logInID;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
 
         if(!sharedPref.getString("logInID","").equals("")){
             Intent intent = new Intent(this, HomeActivity.class);
-            logInID = sharedPref.getString("logInID","");
             startActivity(intent);
         }
 
@@ -61,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
                         Student s = list.get(0);
                         if (s.getPassword().equals(password.getText().toString())) {
                             Intent intent = new Intent(this, HomeActivity.class);
-                            logInID = id.getText().toString();
                             editor.putString("logInID", id.getText().toString());
                             editor.commit();
                             startActivity(intent);
